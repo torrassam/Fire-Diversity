@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Code for Master Thesis "How fires shape biodiversity in plant communities: a study using a stochastic dynamical model" (Torrassa, 2023)
+Code for paper "Functional and compositional diversity display a maximum at intermediate levels of fire return time in a minimal plant-fire feedback model" (Torrassa&Vissio, submitted)
 __date__ = '20240618'
 __version__ = '2.0.1'
 __author__ =
     'Matilde Torrassa' (matilde.torrassa@cimafoundation.org')
+    'Gabriele Vissio' (g.vissio@cnr.it)
 
 General command line:
 python biofire_main.py -settings_file "biofire_setting.json"
@@ -49,8 +50,7 @@ def main():
     # -------------------------------------------------------------------------------------
 
     # Info algorithm
-    logging.info('Generation and Simulation of N-species ecosystems and invasive experiments')
-    logging.info(f'Experiment type: {data_settings["algorithm"]["general"]["experiment"]}')
+    logging.info('Generation and Simulation of N-species ecosystems experiments with fire-feedback')
     logging.info(f'Number of ecosystems: {data_settings["algorithm"]["generation"]["n_communities"]}')
     logging.info(f'--> Number of initial species: {data_settings["algorithm"]["generation"]["n_species"]}')
     
@@ -70,7 +70,7 @@ def main():
 
     # PARAMETERS from json and function file
 
-    exp_sname = data_settings["algorithm"]["general"]["experiment"][0:3] #experiment short-name for the dir and files names ("com_" or "inv_")
+    exp_sname = data_settings["algorithm"]["general"]["experiment"][0:3]
 
     bft.initial_conditions(NP)
 
@@ -102,51 +102,24 @@ def main():
         nc_old = len(f_list)
 
         for nc in range(Ncoms-nc_old):
-            
-            # Experiment selection from the json file: "community", "invasive"
 
-            if data_settings["algorithm"]["general"]["experiment"]=="community":
+            # Community Generation distribution from the json file: "RU", "RCL", "RCE"
 
-                # Community Generation distribution from the json file: "RU", "RCL", "RCE"
+            if data_settings["algorithm"]["generation"]["distribution"]=="RU":
+                bft.rand_uniform_community(rng=rng0, nnew=NP)
 
-                if data_settings["algorithm"]["generation"]["distribution"]=="RU":
-                    bft.rand_uniform_community(rng=rng0, nnew=NP)
+            elif data_settings["algorithm"]["generation"]["distribution"]=="RCL":
+                bft.rand_linear_community(rng=rng0, nnew=NP, noise=noise)
 
-                elif data_settings["algorithm"]["generation"]["distribution"]=="RCL":
-                    bft.rand_linear_community(rng=rng0, nnew=NP, noise=noise)
+            # NEW! generation with meditteranean traits
+            elif data_settings["algorithm"]["generation"]["distribution"]=="MED":
+                bft.rand_linear_community_med(rng=rng0, nnew=NP)
 
-                # NEW! generation with meditteranean traits
-                elif data_settings["algorithm"]["generation"]["distribution"]=="MED":
-                    bft.rand_linear_community_med(rng=rng0, nnew=NP)
-
-                elif data_settings["algorithm"]["generation"]["distribution"]=="RCE":
-                    bft.rand_exponential_community(rng=rng0, nnew=NP, noise=noise)
-
-                else:
-                    logging.error("Distribution name not valid")
-                    return
-
-            elif data_settings["algorithm"]["general"]["experiment"]=="invasive":
-                
-                bft.med_community()
-
-                # Community Generation distribution from the json file: "RU", "RCL", "RCE"
-                
-                if data_settings["algorithm"]["generation"]["distribution"]=="RU":
-                    bft.ru_invasive(rng=rng0, nnew=1)
-                
-                elif data_settings["algorithm"]["generation"]["distribution"]=="RCL":
-                    bft.rcl_invasive(rng=rng0, nnew=1, cvar=noise)
-                
-                elif data_settings["algorithm"]["generation"]["distribution"]=="RCE":
-                    bft.rce_invasive(rng=rng0, nnew=1, cvar=noise)
-                
-                else:
-                    logging.error("Distribution name not valid")
-                    return
+            elif data_settings["algorithm"]["generation"]["distribution"]=="RCE":
+                bft.rand_exponential_community(rng=rng0, nnew=NP, noise=noise)
 
             else:
-                logging.error("Experiment name not valid")
+                logging.error("Distribution name not valid")
                 return
 
             f_info = os.path.join(f_path, data_settings["output"]["data"]["file_info"].format(exp_sname, data_settings["algorithm"]["generation"]["distribution"], noise, NP, nc+nc_old))
@@ -206,7 +179,6 @@ def main():
             bft.set_traits(f_info)
 
             bft.eco_info()
-            iINV = np.nonzero(bft.spp)[0]
             
             it = 0
             while it<nt:
@@ -225,22 +197,7 @@ def main():
                     # create the figure canva if "figure"=true
                     if data_settings["algorithm"]["general"]["figure"]:
                         fig, ax = plt.subplots(figsize=(6,3), dpi=100)
-                        ax.set(xlim=(0, NN/365), ylim=(0, 1))        
-
-                    if data_settings["algorithm"]["general"]["experiment"]=="invasive":
-                        # DYNAMIC with native species only for the initial time (initT, N1)
-                        bb, fv = bft.dyn(b0, bout_nat, N1, firevf)
-                        b0 = bb[:,-1]
-                        logging.info(f'Space occupation at t= {N1/365} yr : {b0*(b0>1.0e-10)}')        
-                        if len(fv)>0:
-                            firevf = fv[-1]
-                        # Alien species initial condition: 0.01
-                        b0[iINV] = 0.01
-
-                        # if data_settings["algorithm"]["general"]["figure"]:
-                        #     xx = np.arange(0, N1)/365
-                        #     for i in range(NP):
-                        #         ax.plot(xx, bb[i], label=f'pft {i}', color=mytab[i])
+                        ax.set(xlim=(0, NN/365), ylim=(0, 1))
 
                     # DYNAMIC for the first half of the simulation (maxT/2, N0)
                     bb, fv = bft.dyn(b0, bout, N0, firevf)
