@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Function and routines file used in biofire_main.py for MT "How fires shape biodiversity in plant communities: a study using a stochastic dynamical model" (Torrassa, 2023)
+Function and routines file used in biofire_main.py for paper "Functional and compositional diversity display a maximum at intermediate levels of fire return time in a minimal plant-fire feedback model" (Torrassa&Vissio, submitted)
 """
-
-import os
 import json
 import logging
 import sys
 
 # import numba
-from random import random, uniform
+from random import random
 import numpy as np
 from numpy.random import default_rng
 import scipy
@@ -396,7 +394,5 @@ def set_color_tab(N):
 
 if __name__ == "__main__":
     rng = default_rng()
-    med_community()
-    # rand_exponential_pft(rng,2,3)
-    rand_exponential_invasive(rng, 1, 3)
     initial_conditions(NP)
+    C,M,R,L = rand_linear_community_med(rng, NP)
