@@ -1,0 +1,362 @@
+# COMPOSITIONAL DIVERSITY
+med - 10 - srichness 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the srichness and fire return time relationship for the $N=10$ med simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_srich_med10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & 66264.7 & -0.000 & 0.0 & 1.0 \\
+ & 2 & 73967.9 & 0.114 & 7188.7 & 0.0 \\
+ & 3 & 73886.2 & 0.123 & 8419.8 & 0.0 \\
+ & 4 & 72715.0 & 0.129 & 9446.2 & 0.0 \\
+ & 5 & 72258.5 & 0.131 & 15699.0 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 86792.5 & -0.000 & 0.0 & 1.0 \\
+ & 2 & 80061.0 & 0.049 & 3462.6 & 0.0 \\
+ & 3 & 79349.7 & 0.059 & 3975.1 & 0.0 \\
+ & 4 & 79453.6 & 0.059 & 4560.5 & 0.0 \\
+ & 5 & 79560.9 & 0.060 & 5821.4 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 108718.3 & -0.000 & 0.0 & 1.0 \\
+ & 2 & 99283.1 & 0.100 & 6388.6 & 0.0 \\
+ & 3 & 98757.7 & 0.113 & 7248.3 & 0.0 \\
+ & 4 & 98695.7 & 0.113 & 7458.7 & 0.0 \\
+ & 5 & 98596.6 & 0.113 & 7608.0 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+med - 10 - isimpson 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the isimpson and fire return time relationship for the $N=10$ med simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_isimp_med10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & 50136.8 & 0.009 & 463.1 & 0.0 \\
+ & 2 & 47626.7 & 0.069 & 1686.9 & 0.0 \\
+ & 3 & 46526.2 & 0.092 & 3704.6 & 0.0 \\
+ & 4 & 46738.8 & 0.094 & 5556.3 & 0.0 \\
+ & 5 & 46664.0 & 0.094 & 5189.3 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 58576.3 & 0.003 & 182.3 & 0.0 \\
+ & 2 & 58017.5 & 0.064 & 897.1 & 0.0 \\
+ & 3 & 58189.1 & 0.085 & 1689.7 & 0.0 \\
+ & 4 & 58438.9 & 0.085 & 1876.9 & 0.0 \\
+ & 5 & 58871.5 & 0.087 & 2201.0 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 83158.3 & 0.011 & 465.8 & 0.0 \\
+ & 2 & 79475.8 & 0.085 & 805.1 & 0.0 \\
+ & 3 & 78362.4 & 0.117 & 2282.4 & 0.0 \\
+ & 4 & 78255.9 & 0.117 & 2484.7 & 0.0 \\
+ & 5 & 77958.1 & 0.120 & 2779.4 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+bor - 10 - srichness 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the srichness and fire return time relationship for the $N=10$ bor simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_srich_bor10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & 82255.1 & 0.021 & 3400.8 & 0.0 \\
+ & 2 & 78642.0 & 0.101 & 8195.1 & 0.0 \\
+ & 3 & 75968.1 & 0.133 & 9386.8 & 0.0 \\
+ & 4 & 76239.4 & 0.135 & 14675.8 & 0.0 \\
+ & 5 & 76404.4 & 0.135 & 15255.1 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 88308.5 & -0.000 & 0.0 & 1.0 \\
+ & 2 & 94168.1 & 0.074 & 3446.8 & 0.0 \\
+ & 3 & 90530.5 & 0.112 & 7240.5 & 0.0 \\
+ & 4 & 90192.7 & 0.114 & 7801.3 & 0.0 \\
+ & 5 & 89831.3 & 0.114 & 7530.6 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 108094.4 & -0.000 & 0.0 & 1.0 \\
+ & 2 & 109876.6 & 0.067 & 237.7 & 0.0 \\
+ & 3 & 108748.9 & 0.104 & 3522.5 & 0.0 \\
+ & 4 & 108571.5 & 0.105 & 4017.8 & 0.0 \\
+ & 5 & 108244.8 & 0.107 & 4223.7 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+bor - 10 - isimpson 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the isimpson and fire return time relationship for the $N=10$ bor simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_isimp_bor10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & 50321.8 & 0.125 & 6137.1 & 0.0 \\
+ & 2 & 48733.2 & 0.139 & 4382.8 & 0.0 \\
+ & 3 & 47948.2 & 0.222 & 34950.3 & 0.0 \\
+ & 4 & 47677.6 & 0.224 & 44128.7 & 0.0 \\
+ & 5 & 48161.1 & 0.228 & 59725.2 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 63083.7 & 0.117 & 6297.8 & 0.0 \\
+ & 2 & 59869.8 & 0.135 & 1971.9 & 0.0 \\
+ & 3 & 59546.3 & 0.231 & 42125.0 & 0.0 \\
+ & 4 & 59519.9 & 0.231 & 41951.1 & 0.0 \\
+ & 5 & 59668.9 & 0.235 & 63763.6 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 84892.6 & 0.091 & 3947.4 & 0.0 \\
+ & 2 & 81232.4 & 0.131 & 1347.4 & 0.0 \\
+ & 3 & 78214.3 & 0.222 & 5388.1 & 0.0 \\
+ & 4 & 78276.0 & 0.222 & 5402.5 & 0.0 \\
+ & 5 & 78213.6 & 0.223 & 5745.3 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+med - 50 - srichness 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the srichness and fire return time relationship for the $N=50$ med simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_srich_med50}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & 206497.2 & 0.022 & 3609.7 & 0.0 \\
+ & 2 & 202581.9 & 0.094 & 8817.8 & 0.0 \\
+ & 3 & 197942.7 & 0.121 & 24784.0 & 0.0 \\
+ & 4 & 197622.2 & 0.122 & 25423.2 & 0.0 \\
+ & 5 & 198614.0 & 0.123 & 31012.2 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 224730.5 & -0.000 & 0.0 & 1.0 \\
+ & 2 & 221170.0 & 0.066 & 1952.2 & 0.0 \\
+ & 3 & 225203.2 & 0.093 & 15878.6 & 0.0 \\
+ & 4 & 224584.6 & 0.094 & 15457.3 & 0.0 \\
+ & 5 & 224227.7 & 0.094 & 14996.4 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 258174.9 & -0.000 & 0.0 & 1.0 \\
+ & 2 & 263748.2 & 0.072 & 3469.7 & 0.0 \\
+ & 3 & 258786.5 & 0.106 & 10946.0 & 0.0 \\
+ & 4 & 258792.1 & 0.106 & 10723.9 & 0.0 \\
+ & 5 & 258743.1 & 0.106 & 10907.0 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+med - 50 - isimpson 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the isimpson and fire return time relationship for the $N=50$ med simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_isimp_med50}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & 141595.5 & 0.041 & 2829.3 & 0.0 \\
+ & 2 & 137818.4 & 0.082 & 2656.1 & 0.0 \\
+ & 3 & 136232.0 & 0.113 & 17296.0 & 0.0 \\
+ & 4 & 136247.7 & 0.115 & 14064.8 & 0.0 \\
+ & 5 & 136274.5 & 0.115 & 14204.8 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 165699.8 & 0.036 & 4088.5 & 0.0 \\
+ & 2 & 161632.7 & 0.082 & 2911.8 & 0.0 \\
+ & 3 & 160152.4 & 0.110 & 5866.2 & 0.0 \\
+ & 4 & 159835.1 & 0.112 & 6167.7 & 0.0 \\
+ & 5 & 159702.2 & 0.114 & 8935.6 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 208265.6 & 0.035 & 2196.6 & 0.0 \\
+ & 2 & 204345.0 & 0.076 & 656.2 & 0.0 \\
+ & 3 & 199913.6 & 0.122 & 4314.0 & 0.0 \\
+ & 4 & 199608.6 & 0.122 & 4180.2 & 0.0 \\
+ & 5 & 199987.1 & 0.123 & 4735.5 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+# FUNCTIONAL DIVERSITY
+med - 10 - frichness 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the frichness and fire return time relationship for the $N=10$ Mediterranean simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_frich_Mediterranean10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & -182593.3 & 0.013 & 2324.9 & 0.0 \\
+ & 2 & -182572.7 & 0.014 & 263.2 & 0.0 \\
+ & 3 & -183153.1 & 0.032 & 13161.5 & 0.0 \\
+ & 4 & -183171.9 & 0.032 & 20224.0 & 0.0 \\
+ & 5 & -183266.0 & 0.037 & 30265.7 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & -183293.8 & 0.027 & 2063.8 & 0.0 \\
+ & 2 & -183573.8 & 0.029 & 400.3 & 0.0 \\
+ & 3 & -183694.6 & 0.066 & 18657.7 & 0.0 \\
+ & 4 & -183700.1 & 0.066 & 22792.3 & 0.0 \\
+ & 5 & -183485.8 & 0.076 & 37288.2 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & -155535.0 & 0.062 & 1099.6 & 0.0 \\
+ & 2 & -155954.9 & 0.062 & 1893.1 & 0.0 \\
+ & 3 & -154337.5 & 0.133 & 58432.5 & 0.0 \\
+ & 4 & -154086.5 & 0.133 & 73635.2 & 0.0 \\
+ & 5 & -154775.9 & 0.149 & 99859.8 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+med - 10 - fdivergence 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the fdivergence and fire return time relationship for the $N=10$ Mediterranean simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_fdive_Mediterranean10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & -1420.6 & 0.050 & 2530.9 & 0.0 \\
+ & 2 & -4659.8 & 0.076 & 1604.2 & 0.0 \\
+ & 3 & -7050.5 & 0.106 & 3612.1 & 0.0 \\
+ & 4 & -6532.0 & 0.109 & 2843.6 & 0.0 \\
+ & 5 & -6176.9 & 0.111 & 3488.0 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 7524.5 & 0.061 & 2705.8 & 0.0 \\
+ & 2 & 5756.7 & 0.077 & 1890.5 & 0.0 \\
+ & 3 & 3985.7 & 0.092 & 2742.0 & 0.0 \\
+ & 4 & 3714.9 & 0.104 & 3314.8 & 0.0 \\
+ & 5 & 3908.0 & 0.106 & 2909.6 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 18732.0 & 0.073 & 3347.4 & 0.0 \\
+ & 2 & 18153.1 & 0.078 & 2196.7 & 0.0 \\
+ & 3 & 17282.1 & 0.081 & 1794.7 & 0.0 \\
+ & 4 & 16853.9 & 0.088 & 2199.4 & 0.0 \\
+ & 5 & 16689.1 & 0.095 & 2535.2 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+bor - 10 - frichness 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the frichness and fire return time relationship for the $N=10$ Boreal simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_frich_Boreal10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & -226000.8 & 0.047 & 4968.4 & 0.0 \\
+ & 2 & -225940.4 & 0.047 & 7723.2 & 0.0 \\
+ & 3 & -227037.0 & 0.087 & 27776.6 & 0.0 \\
+ & 4 & -227032.2 & 0.092 & 71588.4 & 0.0 \\
+ & 5 & -227042.0 & 0.094 & 64131.7 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & -222537.2 & 0.076 & 3755.9 & 0.0 \\
+ & 2 & -222194.5 & 0.076 & 7555.9 & 0.0 \\
+ & 3 & -222089.9 & 0.140 & 34546.0 & 0.0 \\
+ & 4 & -221853.3 & 0.145 & 72310.4 & 0.0 \\
+ & 5 & -221922.3 & 0.147 & 65681.1 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & -192306.5 & 0.099 & 2938.8 & 0.0 \\
+ & 2 & -191942.3 & 0.099 & 6528.0 & 0.0 \\
+ & 3 & -193116.9 & 0.186 & 117646.0 & 0.0 \\
+ & 4 & -193065.6 & 0.186 & 144733.1 & 0.0 \\
+ & 5 & -193087.3 & 0.191 & 140562.8 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+bor - 10 - fdivergence 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the fdivergence and fire return time relationship for the $N=10$ Boreal simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_fdive_Boreal10}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & -1581.6 & 0.102 & 7959.8 & 0.0 \\
+ & 2 & -5945.7 & 0.142 & 5518.9 & 0.0 \\
+ & 3 & -9056.6 & 0.175 & 16637.8 & 0.0 \\
+ & 4 & -9019.0 & 0.175 & 16824.3 & 0.0 \\
+ & 5 & -6014.2 & 0.184 & 31499.8 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & 5133.2 & 0.103 & 7329.9 & 0.0 \\
+ & 2 & 2235.1 & 0.128 & 6224.9 & 0.0 \\
+ & 3 & 317.4 & 0.134 & 6310.8 & 0.0 \\
+ & 4 & 282.2 & 0.134 & 6380.0 & 0.0 \\
+ & 5 & 2575.0 & 0.152 & 36905.9 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 14401.0 & 0.106 & 4557.9 & 0.0 \\
+ & 2 & 13600.2 & 0.117 & 3770.7 & 0.0 \\
+ & 3 & 13457.5 & 0.117 & 4033.4 & 0.0 \\
+ & 4 & 13520.0 & 0.117 & 4153.1 & 0.0 \\
+ & 5 & 13619.9 & 0.130 & 16966.6 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+med - 50 - frichness 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the frichness and fire return time relationship for the $N=50$ Mediterranean simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_frich_Mediterranean50}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & -424573.1 & 0.042 & 6969.9 & 0.0 \\
+ & 2 & -424201.7 & 0.044 & 71188.1 & 0.0 \\
+ & 3 & -426192.4 & 0.071 & 37507.0 & 0.0 \\
+ & 4 & -426494.5 & 0.081 & 150085.6 & 0.0 \\
+ & 5 & -426496.7 & 0.081 & 147609.9 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & -417613.4 & 0.075 & 6464.5 & 0.0 \\
+ & 2 & -412637.9 & 0.083 & 128966.2 & 0.0 \\
+ & 3 & -418836.6 & 0.117 & 54339.2 & 0.0 \\
+ & 4 & -417174.4 & 0.128 & 183063.0 & 0.0 \\
+ & 5 & -416997.7 & 0.128 & 185507.3 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & -358927.4 & 0.109 & 2987.4 & 0.0 \\
+ & 2 & -353162.1 & 0.122 & 135920.8 & 0.0 \\
+ & 3 & -356645.6 & 0.168 & 190448.0 & 0.0 \\
+ & 4 & -357598.3 & 0.176 & 465023.9 & 0.0 \\
+ & 5 & -357511.7 & 0.176 & 455123.6 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
+med - 50 - fdivergence 
+
+\begin{table}[h!]
+\caption{Quantile regression statistics of the fdivergence and fire return time relationship for the $N=50$ Mediterranean simulations, across quantiles ($75^{th}$, $85^{th}$ and $95^{th}$) and polynomial orders (1 to 5). The table includes the Akaike Information Criterion (AIC), pseudo R-squared, Wald test statistic, and p-value. (*) indicates the best polynomial order for each quantile.}
+\label{tab:qreg_fdive_Mediterranean50}
+\begin{tabular}{ll|cccc}
+\multirow{2}{*}{\textbf{Quantile}} & \textbf{Polynomial} & \multirow{2}{*}{\textbf{AIC}} & \multirow{2}{*}{\textbf{R-squared}} & \multicolumn{2}{c}{\textbf{Wald test}} \
+& \textbf{Order} &  &  & \textbf{Statistics} & \textbf{p-value} \\
+\midrule
+\multirow{5}{*}{0.75} & 1 & -16632.4 & 0.134 & 15180.2 & 0.0 \\
+ & 2 & -19453.4 & 0.138 & 12895.5 & 0.0 \\
+ & 3 & -20854.9 & 0.140 & 14144.3 & 0.0 \\
+ & 4 & -22412.2 & 0.142 & 12790.1 & 0.0 \\
+ & 5 & -21720.7 & 0.155 & 24296.8 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.85} & 1 & -3336.8 & 0.149 & 17972.3 & 0.0 \\
+ & 2 & -3787.7 & 0.150 & 16776.4 & 0.0 \\
+ & 3 & -3785.2 & 0.150 & 16788.5 & 0.0 \\
+ & 4 & -4059.1 & 0.150 & 16899.5 & 0.0 \\
+ & 5 & -5779.6 & 0.155 & 19566.6 & 0.0 \\
+\midrule
+\multirow{5}{*}{0.95} & 1 & 16492.5 & 0.144 & 5622.6 & 0.0 \\
+ & 2 & 16348.9 & 0.144 & 5692.8 & 0.0 \\
+ & 3 & 16352.9 & 0.144 & 5795.2 & 0.0 \\
+ & 4 & 16837.5 & 0.145 & 8356.5 & 0.0 \\
+ & 5 & 17316.7 & 0.146 & 9381.0 & 0.0 \\
+\end{tabular}
+\end{table}
+
+
