@@ -227,12 +227,6 @@ def equil_til(NP, Clist, Mlist):
         # print(ii+1, beq[ii])
     # print('occupied space at equilibrium:', np.sum(beq),'\n')
     return beq
-    
-def coex_fire(Tfire):
-    Tp = - np.log(R) / (C - M)
-    cond = Tfire > Tp
-    # print(cond)
-    return cond
 
 def richness(b, bmin=1e-05):
     """
