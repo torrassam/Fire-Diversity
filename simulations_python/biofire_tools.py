@@ -160,39 +160,6 @@ def initial_conditions(NP, binv=0.0):
     iINV = np.nonzero(spp)          
     for i in iINV[0]:
         B0ic = np.insert(B0ic, i, np.ones(nNAT+2)*binv, axis=1)
-    
-def med_community():
-    global NP, C, M, R, L, B0ic, spp
-    NP = 6
-    spp = np.zeros(NP)
-    C0 = 0.047
-    C1 = 0.053
-    C2 = 0.045
-    C3 = 0.067
-    C4 = 0.11
-    C5 = 0.22
-    C = np.array([C0, C1, C2, C3, C4, C5])
-    M0 = 1/400
-    M1 = 1/125
-    M2 = 1/50
-    M3 = 1/25
-    M4 = 1/15
-    M5 = 1/40
-    M = np.array([M0, M1, M2, M3, M4, M5])
-    R0 = 0.85
-    R1 = 0.40
-    R2 = 0.50
-    R3 = 0.50
-    R4 = 0.50
-    R5 = 0.40
-    R = np.array([R0, R1, R2, R3, R4, R5])
-    L0 = 1/500
-    L1 = 1/20
-    L2 = 1/15
-    L3 = 1/10
-    L4 = 1/10
-    L5 = 1/10
-    L = np.array([L0, L1, L2, L3, L4, L5])
 
 #-------------------------------------------------------------------
 
@@ -204,10 +171,10 @@ def flammability(rng, frt_min=1, frt_max=1000, size=1):
     return 1/frt
 
 #-------------------------------------------------------------------
-# GENERATION OF LINEAR C-M BASED ON THE MEDITERRANEAN TRAITS
+# GENERATION OF LINEAR C-M BASED ON THE MEDITERRANEAN and BOREAL ECOSYSTEM
 #-------------------------------------------------------------------
 
-def trait_linear_med(rng, t_max=1, t_min=0.01, size=1, sigma=0.007):
+def trait_linear(rng, t_max=1, t_min=0.01, size=1, sigma=0.007):
     """ 
     
     returns an array of colonization rate traits
@@ -243,7 +210,7 @@ def trait_linear_med(rng, t_max=1, t_min=0.01, size=1, sigma=0.007):
     return T
 
 def rand_linear_community_med(rng, nnew):
-    global NP, C, M, R, L#, B0ic, spp
+    global NP, C, M, R, L
 
     # Parametri per la generazione di C ed M presi dalla comunità del mediterraneo
 
@@ -256,7 +223,7 @@ def rand_linear_community_med(rng, nnew):
     C_reg = reg_ic.intercept + reg_ic.slope*I_med
     C_std = np.std(C_reg - C_med)
 
-    M_med = np.array([1/400, 1/125, 1/50, 1/25, 1/15, 1/40])
+    M_med = np.array([0.0025, 0.008, 0.02, 0.04, 0.0667, 0.025])
     reg_im = scipy.stats.linregress(x=I_med, y=M_med)
     M_min = reg_im.slope*1 + reg_im.intercept
     M_max = reg_im.slope*6 + reg_im.intercept
@@ -265,304 +232,55 @@ def rand_linear_community_med(rng, nnew):
     
     m, c = 0, 0
     while np.any(c<=m): #faccio il while solo su M in modo da non dover generare un'altra volta anche C
-        c = np.round(trait_linear_med(rng, t_max=C_max, t_min=C_min, size=nnew, sigma=C_std), 5)
-        m = np.round(trait_linear_med(rng, t_max=M_max, t_min=M_min, size=nnew, sigma=M_std), 5)
+        c = np.round(trait_linear(rng, t_max=C_max, t_min=C_min, size=nnew, sigma=C_std), 5)
+        m = np.round(trait_linear(rng, t_max=M_max, t_min=M_min, size=nnew, sigma=M_std), 5)
     
     
     r = np.round(rng.uniform(.001,1,size=nnew), 5)
     l = np.round(flammability(rng, frt_min=2, frt_max=500, size=nnew), 5)
     
-    # NP = nnew
-    # spp = np.zeros(NP)
     C = c
     M = m
     R = r
     L = l
-    # initial_conditions(nnew)
 
     return C,M,R,L
 
-#-------------------------------------------------------------------
 
-def rand_uniform_community(rng, nnew):
-    """
-    Create a plant community with random uniform traits
+def rand_linear_community_bor(rng, nnew):
+    global NP, C, M, R, L
+
+    # Parametri per la generazione di C ed M presi dalla comunità del mediterraneo
+
+    I_med = np.arange(1,7)
+
+    C_med = np.array([0.085, 0.13, 0.17])
+    reg_ic = scipy.stats.linregress(x=I_med, y=C_med)
+    C_min = reg_ic.slope*1 + reg_ic.intercept
+    C_max = reg_ic.slope*3 + reg_ic.intercept
+    C_reg = reg_ic.intercept + reg_ic.slope*I_med
+    C_std = np.std(C_reg - C_med)
+
+    M_med = np.array([0.035, 0.015, 0.023])
+    reg_im = scipy.stats.linregress(x=I_med, y=M_med)
+    M_min = reg_im.slope*1 + reg_im.intercept
+    M_max = reg_im.slope*3 + reg_im.intercept
+    M_reg = reg_im.intercept + reg_im.slope*I_med
+    M_std = np.std(M_reg - M_med)
     
-    Parameters
-    ----------
-    rng: random generator
-    nnew : int or tuple of ints, optional
-        Number of the new PFTs. The default value is 1. 
+    m, c = 0, 0
+    while np.any(c<=m): #faccio il while solo su M in modo da non dover generare un'altra volta anche C
+        c = np.round(trait_linear(rng, t_max=C_max, t_min=C_min, size=nnew, sigma=C_std), 5)
+        m = np.round(trait_linear(rng, t_max=M_max, t_min=M_min, size=nnew, sigma=M_std), 5)
     
-    Returns
-    -------
-    None
-    """
-    global NP, C, M, R, L, B0ic, spp
     
-    c, m = 0., 0.
-    while np.any(c<=m):
-        c = np.round(rng.uniform(.001,100,size=nnew), 3)
-        m = np.round(rng.uniform(.001,10,size=nnew), 3)
-    r = np.round(rng.uniform(.001,1,size=nnew), 3)
-    l = np.round(flammability(rng, frt_min=2, frt_max=500, size=nnew), 3)
-    
-    NP = nnew
-    spp = np.zeros(NP)
+    r = np.round(rng.uniform(.001,1,size=nnew), 5)
+    l = np.round(flammability(rng, frt_min=2, frt_max=500, size=nnew), 5)
+
     C = c
     M = m
     R = r
     L = l
-    initial_conditions(nnew)
-
-    return C,M,R,L
-
-def rand_uniform_invasive(rng, nnew=1):
-    """
-    Insert nnew new PFTs with random traits into an exixting community. Hyerarchical position i is random as well
-    
-    Parameters
-    ----------
-    rng: random generator
-    nnew : int or tuple of ints, optional
-        Number of the new PFTs. The default value is 1. 
-    
-    Returns
-    -------
-    None
-    """
-    global NP, C, M, R, L, B0ic
-    
-    for inew in np.arange(nnew):
-        i = int(uniform(0,NP))
-        c, m = 0., 0.
-        while c<=m:
-            c = round(uniform(.001,100),3)
-            m = round(uniform(.001,10),3)
-        l = round(uniform(.001,1),3)
-        r = round(uniform(.001,1),3)
-        NP += 1
-        C = np.insert(C,i,c)
-        M = np.insert(M,i,m)
-        R = np.insert(R,i,r)
-        L = np.insert(L,i,l)
-        
-        B0ic = np.insert(B0ic, i, 0.01, axis=1)
-        B0ic = np.insert(B0ic, i+1, 0.01, axis=0)
-        B0ic[i+1,i]=0.89
-
-
-#-------------------------------------------------------------------
-
-def trait_linear(rng, t_max=1, t_min=0.01, size=1, sigma=0.5):
-    """ 
-    
-    returns an array of the selected trait
-        
-    Parameters
-    ----------
-    rng: random generator
-    t_max : float, optional
-        The default value is 1
-    t_min : float, optional
-        The default value is 0.01
-    size : int or tuple of ints, optional
-        Size of the desired array. Usually correspond to the size of the pft community. The default value is 1.
-        
-    Returns
-    -------
-    T : ndarray rounded to the 3rd decimal value
-    """
-    N = size
-    # linear correlation
-    ii = np.arange(0,N)+1
-    alfa = (t_max-t_min)/(N-1)
-    beta = t_max - alfa*N
-    # noise
-    T = alfa*ii + beta
-    
-    if sigma!=0:
-        gamma = (t_max-t_min)/(N*sigma)
-        for i in range(0,N):
-            noise = rng.normal(0, gamma)
-            while (T[i]+noise)<0.001 or (T[i]+noise)>t_max:
-                noise = rng.normal(0, gamma)
-            T[i] += noise
-
-    return T
-
-
-def rand_linear_invasive(rng, nnew=1, sigma=0.5):
-    """
-    Insert nnew new PFTs with random traits from Random-C-Exponential function into an exixting community.
-    Hyerarchical position i is random as well from a uniform distribution.
-    
-    Parameters
-    ----------
-    nnew : int or tuple of ints, optional
-        Number of the new PFTs. The default value is 1. 
-    
-    Returns
-    -------
-    None
-    """
-    global NP, C, M, R, L, B0ic, spp
-    
-    for inew in np.arange(nnew):
-        NP +=1
-        i = rng.integers(0,high=NP,size=1)
-        c = np.round(trait_linear(rng, t_max=3, t_min=0.01, size=nnew, sigma=sigma), 3)
-        m = np.round(trait_linear(rng, t_max=0.3, t_min=0.01, size=nnew, sigma=sigma), 3)
-        r = np.round(rng.uniform(.001,1,size=nnew), 3)
-        l = np.round(flammability(rng, frt_min=1, frt_max=1000, size=nnew), 3)
-        logging.info(f'Invasive species traits: i={i+1}, C={c},  M={m}, R={r}, L={l}')
-        
-        C = np.insert(C,i,c)
-        M = np.insert(M,i,m)
-        R = np.insert(R,i,r)
-        L = np.insert(L,i,l)
-        
-        spp = np.insert(spp,i,1)
-        # B0ic = np.insert(B0ic, i, 0.00, axis=1)
-
-
-def rand_linear_community(rng, nnew, sigma=0.7):
-    """
-    Create a plant community with random linear traits
-    
-    Parameters
-    ----------
-    rng: random generator
-    nnew : int or tuple of ints, optional
-        Number of the new PFTs. The default value is 1. 
-    
-    Returns
-    -------
-    None
-    """
-    global NP, C, M, R, L, B0ic, spp
-    
-    c, m = 0., 0.
-    while np.any(c<=m):
-        c = np.round(trait_linear(rng, t_max=100, t_min=0.01, size=nnew, sigma=sigma), 3)
-        m = np.round(trait_linear(rng, t_max=10, t_min=0.01, size=nnew, sigma=sigma), 3)
-    r = np.round(rng.uniform(.001,1,size=nnew), 3)
-    l = np.round(flammability(rng, frt_min=2, frt_max=500, size=nnew), 3)
-    
-    C = c
-    M = m
-    R = r
-    L = l
-    NP = nnew
-    spp = np.zeros(NP)
-    initial_conditions(nnew)
-
-    return C,M,R,L
-    
-#-------------------------------------------------------------------
-
-def trait_exponential(rng, t_max=1, t_min=0.01, size=1, eta=3):
-    """ 
-    
-    returns an array of colonization rate traits
-        
-    Parameters
-    ----------
-    rng: random generator
-    t_max : float, optional
-        The default value is 1
-    t_min : float, optional
-        The default value is 0.01
-    size : int or tuple of ints, optional
-        Size of the desired array. Usually correspond to the size of the pft community. The default value is 1.
-        
-    Returns
-    -------
-    T : ndarray rounded to the 3rd decimal value
-    """
-    N = size
-    # exponential correlation
-    ii = np.arange(0,N)+1
-    alfa = (np.log10(t_min)*N - np.log10(t_max)) / (N-1)
-    beta = (np.log10(t_max) - np.log10(t_min)) / (N-1)
-    # print(f"N={N}, C(i) = 10 ^ ({alfa} + {beta} * i)")
-    # noise
-    T = 10 ** (alfa + beta*ii)
-    
-    if eta!=0:
-        # new function for the noise
-        k = (N-1) / 2**eta
-        gamma = T*(10**(beta*k)-1)
-        for i in range(0,N):
-            noise = rng.normal(0, gamma[i])
-            while (T[i]+noise)<0.001 or (T[i]+noise)>t_max:
-                noise = rng.normal(0, gamma[i])
-            T[i] += noise
-    return T
-
-def rand_exponential_invasive(rng, nnew=1, eta=3):
-    """
-    Insert nnew new PFTs with random traits from Random-C-Exponential function into an exixting community.
-    Hyerarchical position i is random as well from a uniform distribution.
-    
-    Parameters
-    ----------
-    nnew : int or tuple of ints, optional
-        Number of the new PFTs. The default value is 1. 
-    
-    Returns
-    -------
-    None
-    """
-    global NP, C, M, R, L, B0ic, spp
-    
-    for inew in np.arange(nnew):
-        NP +=1
-        i = rng.integers(0,high=NP,size=1)
-        c = np.round(trait_exponential(rng, t_max=3, t_min=0.01, size=NP, eta=eta), 3)[i]
-        m = np.round(trait_exponential(rng, t_max=0.3, t_min=0.01, size=NP, eta=eta), 3)[i]
-        r = np.round(rng.uniform(.001,1,size=1), 3)
-        l = np.round(flammability(rng, frt_min=2, frt_max=500, size=nnew), 3)
-        logging.info(f'Invasive species traits: i={i+1}, C={c},  M={m}, R={r}, L={l}')
-        
-        C = np.insert(C,i,c)
-        M = np.insert(M,i,m)
-        R = np.insert(R,i,r)
-        L = np.insert(L,i,l)
-        
-        spp = np.insert(spp,i,1)
-        # B0ic = np.insert(B0ic, i, 0.00, axis=1)
-
-def rand_exponential_community(rng, nnew, noise=3):
-    """
-    Create a plant community with random exponential traits
-    
-    Parameters
-    ----------
-    rng: random generator
-    nnew : int or tuple of ints, optional
-        Number of the new PFTs. The default value is 1. 
-    
-    Returns
-    -------
-    None
-    """
-    global NP, C, M, R, L#, B0ic, spp
-    
-    c, m = 0., 0.
-    while np.any(c<=m):
-        c = np.round(trait_exponential(rng, t_max=100, t_min=0.01, size=nnew, eta=noise), 3)
-        m = np.round(trait_exponential(rng, t_max=10, t_min=0.01, size=nnew, eta=noise), 3)
-    r = np.round(rng.uniform(.001,1,size=nnew), 3)
-    l = np.round(flammability(rng, frt_min=1, frt_max=1000, size=nnew), 3)
-    
-    # NP = nnew
-    # spp = np.zeros(NP)
-    C = c
-    M = m
-    R = r
-    L = l
-    # initial_conditions(nnew)
 
     return C,M,R,L
 
@@ -579,27 +297,6 @@ def eco_info_file(f_info_str):
     global C, M
     with open(f_info_str,'w') as filei:
         np.savetxt(filei, list(zip(C, M, R, L, spp)), fmt='%1.5f', delimiter="\t")
-
-def set_traits_inv(ifile):
-    global C, M, R, L, NP, spp
-    
-    new_community()
-
-    traits = np.loadtxt(ifile)
-    C = traits[:,0]
-    M = traits[:,1]
-    R = traits[:,2]
-    L = traits[:,3]
-    spp = traits[:,4]
-    NP = len(traits[:,0])
-    # print(C,M,R,L,spp,NP)
-    
-    derivs.recompile()
-    rk4.recompile()
-    fireocc.recompile()
-    dyn.recompile()
-    
-    return
 
 def set_traits(ifile):
     global C, M, R, L, NP

@@ -105,18 +105,11 @@ def main():
 
             # Community Generation distribution from the json file: "RU", "RCL", "RCE"
 
-            if data_settings["algorithm"]["generation"]["distribution"]=="RU":
-                bft.rand_uniform_community(rng=rng0, nnew=NP)
-
-            elif data_settings["algorithm"]["generation"]["distribution"]=="RCL":
-                bft.rand_linear_community(rng=rng0, nnew=NP, noise=noise)
-
-            # NEW! generation with meditteranean traits
-            elif data_settings["algorithm"]["generation"]["distribution"]=="MED":
+            if data_settings["algorithm"]["generation"]["distribution"]=="MED":
                 bft.rand_linear_community_med(rng=rng0, nnew=NP)
 
-            elif data_settings["algorithm"]["generation"]["distribution"]=="RCE":
-                bft.rand_exponential_community(rng=rng0, nnew=NP, noise=noise)
+            elif data_settings["algorithm"]["generation"]["distribution"]=="BOR":
+                bft.rand_linear_community_bor(rng=rng0, nnew=NP, noise=noise)
 
             else:
                 logging.error("Distribution name not valid")
