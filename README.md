@@ -1,6 +1,6 @@
 # Biodiversity in fire-vegetation model
 
-This repository provides the code to model plant-fire relationship in the Mediterranean and Boreal communities, as in xxx.
+This repository provides the code to model plant-fire relationship in the Mediterranean and Boreal communities, as in [DOI or reference here].
 
 DOI:
 
@@ -30,7 +30,12 @@ General command line:
 
 ### Analyses
 
-```analyese/``` folder contains:
+```analyses/``` folder contains:
+
+- `build_dataframes.py`: Script to build dataframes from the simulation outputs.
+- `diff_tilman.py`: Script to analyze the differences in vegetation dynamics compared to Tilman's model.
+- `hypervolumes.py`: Script to calculate hypervolumes for different vegetation types.
+- `ANALYSES_and_FIGURES.ipynb`: Jupyter notebook to generate the figured of the pubblished paper
 
 ## References and Contacts
 This code has been developed within the manuscript: XXX
