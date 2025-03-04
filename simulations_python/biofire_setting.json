@@ -4,8 +4,8 @@
             "title": "Algorithm to generate and simulate random species ecosystems with fire-vegetation feedback",
             "experiment": "community",
             "generation": true,
-            "save_files": false,
-            "simulation": false,
+            "save_files": true,
+            "simulation": true,
             "figure": false
         },
         "generation": {
@@ -16,7 +16,6 @@
         },
         "simulation": {
             "runtime": 10000,
-            "initT": 50,
             "repetition": 1,
             "delta_day": 1,
             "epsilon": 0.001,
