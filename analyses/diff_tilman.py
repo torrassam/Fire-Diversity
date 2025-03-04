@@ -15,7 +15,6 @@ def main():
 
     # species survive with b >= 0.001
     dc = 3
-    bmin = 10**(-dc)
     vc = 10**dc
 
     # Compositional diversity (Species Richness, Inverse Simpson Index)
@@ -171,8 +170,6 @@ def main():
 
     print('FiresModel-Tilman difference')
 
-    df_bp = pd.DataFrame(columns=['eco-type', 'group', 'diversity', 'value'])
-
     df1 = pd.read_csv(os.path.join(fpath_out, 'coms-fire-bioindex-fd.csv'))
     df1['eco-type'] = df1['biome'] + df1['N'].astype(str)
     df1['dynamic'] = 'Fires'
@@ -181,8 +178,6 @@ def main():
     df2['eco-type'] = df2['biome'] + df2['N'].astype(str)
     df2['dynamic'] = 'Tilman'
     df2['ncom'] += 1
-
-    divindex = ['srichness', 'isimpson', 'frichness', 'fdivergence']
 
     df_diff = pd.DataFrame(columns=['eco-type', 'srichness', 'isimpson', 'frichness', 'fdivergence'])
 
