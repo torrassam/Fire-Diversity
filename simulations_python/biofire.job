@@ -4,8 +4,7 @@
 #SBATCH --time 48:00:00
 #SBATCH --job-name=biofire
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=matilde.torrassa@cimafoundation.org
 #SBATCH --output=biofire.out
 
 source activate env_biofire
-python3 div-tilman.py
+python3 biofire_main.py -settings_file "biofire_setting.json"

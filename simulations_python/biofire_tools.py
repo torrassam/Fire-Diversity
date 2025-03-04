@@ -6,7 +6,7 @@ import json
 import logging
 import sys
 
-# import numba
+import numba
 from random import random
 import numpy as np
 from numpy.random import default_rng
@@ -56,7 +56,7 @@ def settings(file_settings):
 
 # -------------------------------------------------------------------------------------
 
-# @numba.jit()
+@numba.jit()
 def derivs(tt, v, dv):
     """ Tilman equations system extended to NP species """
     A = np.ones(NP)         # parameters for Tilman asymetric hierarchy
@@ -66,7 +66,7 @@ def derivs(tt, v, dv):
         dv[ip] = C[ip]*v[ip] * (1-np.sum(v[0:ip+1])) - M[ip]*v[ip] - v[ip]*np.sum((C*v)[0:ip])*A[ip]
         ip += 1
 
-# @numba.jit()
+@numba.jit()
 def rk4(tt, y, dydx):
     """ Runge Kutta 4th Order """
     k2 = np.zeros(NP)
@@ -83,14 +83,14 @@ def rk4(tt, y, dydx):
     yout = y+h6*(k1+2*k2+2*k3+k4)
     return yout
 
-# @numba.jit()
+@numba.jit()
 def fireocc(v, iifire):
     """ Fire Occurrence function """
     v_out = v*(1-iifire) + v*R*iifire
     return v_out
 
 
-# @numba.jit()
+@numba.jit()
 def dyn(b, bout, steps, firevf):
     """ Complete Dynamic of the community """
     i = 0

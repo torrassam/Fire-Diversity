@@ -12,15 +12,16 @@
             "distribution": "MED",
             "n_species": 10,
             "noise": 0,
-            "n_communities": 300
+            "n_communities": 1000
         },
         "simulation": {
             "runtime": 10000,
+            "initT": 50,
             "repetition": 1,
             "delta_day": 1,
             "epsilon": 0.001,
             "minfirerettime": 1,
-            "firevf": 100000,
+            "firevf": 1000,
             "n_coms": [0],
             "n_init": []
         }
