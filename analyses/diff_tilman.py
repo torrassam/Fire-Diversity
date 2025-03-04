@@ -4,7 +4,7 @@ import glob
 import numpy as np
 import pandas as pd
 
-import hypervolume as hvb
+import hypervolumes as hvb
 
 def main():
 
