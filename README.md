@@ -1,10 +1,6 @@
 # Biodiversity in fire-vegetation model
 
-This repository provides the code to model plant-fire relationship in the Mediterranean and Boreal communities, as in [DOI or reference here].
-
-DOI:
-
-Cite as: 
+This repository provides the code to model plant-fire relationship in the Mediterranean and Boreal communities, as in the submitted article "Functional and compositional diversity display a maximum at intermediate levels of fire frequency in a minimal plant-fire feedback model".
 
 ## Summary
 This program models the dynamics of communities in fire prone environments. It includes 3 vegetation types that have different flammability (L), fire response (R), growth rate (c) and mortality rate (m). The model represents the time series of fractional vegetation cover (b) of the 3 plant types. The deterministic succession of plant (Tilman - Ecology, 1994) is perturbed by stochastic fires. Fire is represented as a non-stationary Poisson process, with average fire return time, 'tf'. The average fire return time depends on plant cover and flammability, leading to a fire-vegetation feedback.
