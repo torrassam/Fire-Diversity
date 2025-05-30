@@ -17,7 +17,7 @@ The code is provided in Fortran and in Python language for simulations, Python f
 * `fortran_tilman-h`: header file containing the functions and subroutines used in the main.
 
 General command line:
-`ifort fortran_tilman.f90 -o runFire`
+`gfortran fortran_tilman.f90`
 
 ### Python Code
 
