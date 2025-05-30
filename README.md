@@ -39,12 +39,6 @@ General command line:
 * `hypervolumes.py`: Script to estimate hypervolumes and functional diversity indicators of the resulting communities.
 * `ANALYSES_and_FIGURES.ipynb`: Jupyter notebook to generate the figures of the manuscript.
 
-## Access information
-
-Data was derived from the following source:
-
-Magnani, M., & Baudena, M. (2023). Fire Communities (FireCom) (v1.0). Zenodo. [https://doi.org/10.5281/zenodo.7763275](https://doi.org/10.5281/zenodo.7763275) (Open License)
-
 ## References and Contacts
 This code has been developed within the manuscript: *"Functional and compositional diversity display a maximum at intermediate levels of fire frequency when modeling the plant-fire feedback"*
 
