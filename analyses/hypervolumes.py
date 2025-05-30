@@ -8,7 +8,7 @@ from scipy.spatial.distance import cdist
 
 def main():
 
-    fpath_dir = "/work/users/mtorrassa/biofire-idh/data/"
+    fpath_dir = "path_to_data_archive"
 
     cbio_file = os.path.join(fpath_dir, 'coms-fire-bioindex.csv')
     df_cbio = pd.read_csv(cbio_file)

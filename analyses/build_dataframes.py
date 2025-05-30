@@ -10,8 +10,8 @@ warnings.filterwarnings("ignore", "use_inf_as_na")
 
 def main():
 
-    fpath_in = "../../../gvissio/tilman/results2/"
-    fpath_out = "/work/users/mtorrassa/biofire-idh/data/"
+    fpath_in = "path_to_simulation_files"
+    fpath_out = "path_to_output_files"
 
     hv_communities = True # save the dataframes to estimate the hypervolumes metrics or not
     NPs = [10, 50]

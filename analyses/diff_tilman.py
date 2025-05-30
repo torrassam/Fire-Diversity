@@ -8,8 +8,8 @@ import hypervolumes as hvb
 
 def main():
 
-    fpath_in = "../../../gvissio/tilman/results2/"
-    fpath_out = "/work/users/mtorrassa/biofire-idh/data/"
+    fpath_in = "path_to_simulation_files"
+    fpath_out = "path_to_output_files"
 
     NPs = [10, 50]
 
@@ -19,7 +19,6 @@ def main():
 
     # Compositional diversity (Species Richness, Inverse Simpson Index)
     df_totN= pd.DataFrame(index=['N','biome','ncom','srichness']).T
-    df_tot = pd.DataFrame()
 
     Cmin, Cmax = 0.0, 0.3
     Mmin, Mmax = 0.0, 0.09
@@ -246,7 +245,7 @@ def richness(b, bmin=1e-05):
     elif nd==2:
         sr = np.sum(b>bmin, axis=1)
     else:
-        print('TROPPE DIMENSIONI, restituirò un NAN!')
+        print('Error!')
         sr = np.nan
     return sr
 
@@ -277,7 +276,7 @@ def simpson(b, nnp):
         p2 = np.power(p,2)
         isi = 1 / np.sum(p2, axis=1)
     else:
-        print('TROPPE DIMENSIONI, restituirò un NAN!')
+        print('Error!')
         isi = np.nan
     return isi
 
