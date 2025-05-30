@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Function and routines file used in biofire_main.py for paper "Functional and compositional diversity display a maximum at intermediate levels of fire return time in a minimal plant-fire feedback model" (Torrassa&Vissio, submitted)
+Function and routines file used in biofire_main.py for for submitted manuscript "Functional and compositional diversity display a maximum at intermediate levels of fire return time in a minimal plant-fire feedback model"
 """
 import json
 import logging

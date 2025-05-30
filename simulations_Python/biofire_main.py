@@ -1,21 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Code for paper "Functional and compositional diversity display a maximum at intermediate levels of fire return time in a minimal plant-fire feedback model" (Torrassa&Vissio, submitted)
-__date__ = '20240618'
-__version__ = '2.0.1'
-__author__ =
-    'Matilde Torrassa' (matilde.torrassa@cimafoundation.org')
-    'Gabriele Vissio' (g.vissio@cnr.it)
+Code for submitted manuscript "Functional and compositional diversity display a maximum at intermediate levels of fire return time in a minimal plant-fire feedback model"
 
 General command line:
 python biofire_main.py -settings_file "biofire_setting.json"
-
-Version(s):
-20230405 (1.0.0)
-20240221 (1.1.0)
-20240222 (1.1.1)
-20240305 (2.0.0)
-20240618 (2.0.1) -> fifth version: new generationn functions for C and M based on linear regression of the Med Biome species
 """
 
 import os
