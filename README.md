@@ -7,11 +7,15 @@ This program models the dynamics of communities in fire prone environments. It i
 
 ## Content
 
-The code is provided in Python and in Fortran language.
+The code is provided in Fortran and in Python language.
+
+### Fortran Code
+
+```simulation_Fortran/``` folder contains:
 
 ### Python Code
 
-```simulation_python/``` folder contains:
+```simulation_Python/``` folder contains:
 
 - ```biofire_main.py```: main file for generating the plant communities and simulating the time series of vegetation cover and fires.
 - ```biofire_tools.py```: file containing the functions and subroutines used in the main.
@@ -19,10 +23,6 @@ The code is provided in Python and in Fortran language.
 
 General command line:
 ```python generation.py -settings_file "biofire_setting.json"```
-
-### Fortran Code
-
-```simulation_fortran/``` folder contains:
 
 ### Analyses
 
