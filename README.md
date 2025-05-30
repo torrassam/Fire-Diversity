@@ -43,9 +43,3 @@ General command line:
 This code has been developed within the manuscript: *"Functional and compositional diversity display a maximum at intermediate levels of fire frequency when modeling the plant-fire feedback"*
 
 Please refer to the manuscript for the underlying assumptions and equations.
-
-Authors: Matilde Torrassa and Gabriele Vissio
-
-For more information please contact
-- Matilde Torrassa (matilde.torrassa@cimafoundation.org) concerning the Python code and the analyses;
-- Gabriele Vissio (gabriele.vissio@cnr.it) concerning the Fortran code.
