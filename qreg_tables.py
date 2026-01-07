@@ -6,11 +6,13 @@ import scipy.stats as scs
 import statsmodels.formula.api as smf
 import statsmodels.api as sm
 
+from functools import partial
+
 max_iter = 350000
 
-fpath_out = "/work/users/mtorrassa/biofire-idh/data"
+fpath_out = "/work/users/mtorrassa/biofire-idh/data_new/"
+quantiles = [.85, .90 ,.95]
 
-from functools import partial
 def use_f_2(x, num_decimals):
     return f"%.{num_decimals}f" % x
 
@@ -114,7 +116,7 @@ with open("qreg_tables.txt", "w") as tab_file:
                     data['X_4']=data['X']**4
                     data['X_5']=data['X']**5
 
-                    for q in np.arange(0.75, 1.0, 0.1):
+                    for q in quantiles:
                         for poly in range(1,6):
 
                             if poly==1:
@@ -179,7 +181,9 @@ with open("qreg_tables.txt", "w") as tab_file:
                     # Add additional custom rows and multirow format
                     latex_table = latex_table.replace("0.75 & 1","\\multirow{5}{*}{0.75} & 1").replace("0.75 & 2"," & 2").replace("0.75 & 3"," & 3").replace("0.75 & 4"," & 4").replace("0.75 & 5"," & 5"
                                                     ).replace("0.85 & 1","\\midrule\n\\multirow{5}{*}{0.85} & 1").replace("0.85 & 2"," & 2").replace("0.85 & 3"," & 3").replace("0.85 & 4"," & 4").replace("0.85 & 5"," & 5"
+                                                    ).replace("0.90 & 1","\\midrule\n\\multirow{5}{*}{0.90} & 1").replace("0.90 & 2"," & 2").replace("0.90 & 3"," & 3").replace("0.90 & 4"," & 4").replace("0.90 & 5"," & 5"
                                                     ).replace("0.95 & 1","\\midrule\n\\multirow{5}{*}{0.95} & 1").replace("0.95 & 2"," & 2").replace("0.95 & 3"," & 3").replace("0.95 & 4"," & 4").replace("0.95 & 5"," & 5")
+
 
                     latex_table = latex_table.replace("$75th$, $85t$ and $95th$","$75^{th}$, $85^{th}$ and $95^{th}$")
 
@@ -206,7 +210,7 @@ with open("qreg_tables.txt", "w") as tab_file:
                     data['X_4']=data['X']**4
                     data['X_5']=data['X']**5
 
-                    for q in np.arange(0.75, 1.0, 0.1):
+                    for q in quantiles:
                         for poly in range(1,6):
 
                             if poly==1:
@@ -271,6 +275,7 @@ with open("qreg_tables.txt", "w") as tab_file:
                     # Add additional custom rows and multirow format
                     latex_table = latex_table.replace("0.75 & 1","\\multirow{5}{*}{0.75} & 1").replace("0.75 & 2"," & 2").replace("0.75 & 3"," & 3").replace("0.75 & 4"," & 4").replace("0.75 & 5"," & 5"
                                                     ).replace("0.85 & 1","\\midrule\n\\multirow{5}{*}{0.85} & 1").replace("0.85 & 2"," & 2").replace("0.85 & 3"," & 3").replace("0.85 & 4"," & 4").replace("0.85 & 5"," & 5"
+                                                    ).replace("0.90 & 1","\\midrule\n\\multirow{5}{*}{0.90} & 1").replace("0.90 & 2"," & 2").replace("0.90 & 3"," & 3").replace("0.90 & 4"," & 4").replace("0.90 & 5"," & 5"
                                                     ).replace("0.95 & 1","\\midrule\n\\multirow{5}{*}{0.95} & 1").replace("0.95 & 2"," & 2").replace("0.95 & 3"," & 3").replace("0.95 & 4"," & 4").replace("0.95 & 5"," & 5")
 
                     latex_table = latex_table.replace("$75th$, $85t$ and $95th$","$75^{th}$, $85^{th}$ and $95^{th}$"

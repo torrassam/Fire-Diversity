@@ -1,5 +1,7 @@
 import os
 import glob
+import logging
+import argparse
 
 import numpy as np
 import pandas as pd
@@ -8,8 +10,21 @@ import hypervolumes as hvb
 
 def main():
 
-    fpath_in = "../../../gvissio/tilman/results2/"
-    fpath_out = "/work/users/mtorrassa/biofire-idh/data/"
+    logging.basicConfig(level=logging.INFO)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--in", dest="fpath_in", required=True)
+    parser.add_argument("--out", dest="fpath_out", required=True)
+    args = parser.parse_args()
+    
+    fpath_in = args.fpath_in
+    fpath_out = args.fpath_out
+
+    logging.info("Input directory: %s", fpath_in)
+    logging.info("Output directory: %s", fpath_out)
+
+    # fpath_in = "/home/gvissio/tilman/results_idh"
+    # fpath_out = "/work/users/mtorrassa/biofire-idh/data_new2/"
 
     NPs = [10, 50]
 
@@ -19,29 +34,24 @@ def main():
 
     # Compositional diversity (Species Richness, Inverse Simpson Index)
     df_totN= pd.DataFrame(index=['N','biome','ncom','srichness']).T
-    df_tot = pd.DataFrame()
-
-    Cmin, Cmax = 0.0, 0.3
-    Mmin, Mmax = 0.0, 0.09
-    Lmin, Lmax = 0.002, 0.5
 
     # Dataframe representing the composition of the simulated communities, to estimate the hypervolumes metrices
 
     for NP in NPs:
 
-        print(f'\nMediterranean - N={NP}\n')
+        logging.info(f'\nMediterranean - N={NP}\n')
 
-        filelist = glob.glob(os.path.join(fpath_in, f'coefficients_{NP}_2025-*.txt'))
-        k_com = 0
+        filelist = sorted(glob.glob(os.path.join(fpath_in, f'coefficients_{NP}_2025-*.txt')))
+        k_com = 1
 
         for k, info_file in enumerate(filelist):
-            # print(k_com)
+            # logging.info(k_com)
 
             arr = np.loadtxt(info_file)
             
             for i,a in enumerate(arr):
                 i_com = i+k_com
-                # print(i_com)
+                # logging.info(i_com)
 
                 n_com = np.ones(NP) * int(arr[i][0])
                 ind = np.arange(0,NP)+1
@@ -76,11 +86,23 @@ def main():
                     L1 = df['L'].repeat(cov)
                     df1 = pd.concat([I1, C1, M1, R1, L1], axis=1)
 
-                    df1['I'] = (df1['I'] - 1) / (NP-1)
-                    df1['C'] = (df1['C'] - Cmin) / (Cmax - Cmin)
-                    df1['M'] = (df1['M'] - Mmin) / (Mmax - Mmin)
-                    df1['L'] = (df1['L'] - Lmin) / (Lmax - Lmin) 
-                    np_temp = df1.to_numpy()[:,1:]
+                    if NP==10:
+                        Cmin, Cmax = 0.0, 0.27 # 0.0, 20.6
+                        Mmin, Mmax = 0.0, 0.1 # 0.0, 2.1
+                    elif NP==50:
+                        Cmin, Cmax = 0.0, 0.3 # 0.0, 22.5
+                        Mmin, Mmax = 0.0, 0.1 # 0.0, 2.1
+                    else:
+                        Cmin, Cmax = 0.0, 0.5 # dummy values
+                        Mmin, Mmax = 0.0, 0.1 # dummy values
+                    
+                    Lmin, Lmax = 0.002, 0.5
+
+                    df['C'] = (df['C'] - Cmin) / (Cmax - Cmin)
+                    df['M'] = (df['M'] - Mmin) / (Mmax - Mmin)
+                    df['L'] = (df['L'] - Lmin) / (Lmax - Lmin)
+
+                    np_temp = df1[['C','R','L']].to_numpy()
 
                     try:
                         hv = hvb.hypervolume(np_temp, verbose=False)
@@ -89,7 +111,7 @@ def main():
                         # fd_reg = hvb.kernel_evenness(hv, mins=mins, maxs=maxs)
                         
                     except Exception as e:
-                        print(beq)
+                        logging.info(beq)
                         fd_rich = 0.0
                         fd_div = 0.0
 
@@ -100,19 +122,19 @@ def main():
             k_com = i_com+1
 
     # Append the boreal simulation (that are named differently...)
-        print(f'\nBoreal - N={NP}\n')
+        logging.info(f'\nBoreal - N={NP}\n')
 
-        filelist = glob.glob(os.path.join(fpath_in, f'bor_coefficients_{NP}_2025-*.txt'))
-        k_com = 0
+        filelist = sorted(glob.glob(os.path.join(fpath_in, f'bor_coefficients_{NP}_2025-*.txt')))
+        k_com = 1
 
         for k, info_file in enumerate(filelist):
-            # print(k_com)
+            # logging.info(k_com)
 
             arr = np.loadtxt(info_file)
             
             for i,a in enumerate(arr):
                 i_com = i+k_com
-                # print(i_com)
+                # logging.info(i_com)
 
                 n_com = np.ones(NP) * int(arr[i][0])
                 ind = np.arange(0,NP)+1
@@ -142,12 +164,16 @@ def main():
                     L1 = df['L'].repeat(cov)
                     df1 = pd.concat([I1, C1, M1, R1, L1], axis=1)
 
-                    df1['I'] = (df1['I'] - 1) / (NP-1)
+                    Cmin, Cmax = 0.0, 0.18 # 0.0, 2.1
+                    Mmin, Mmax = 0.0, 0.05 # 0.0, 0.1          
+                    Lmin, Lmax = 0.002, 0.5
+
                     df1['C'] = (df1['C'] - Cmin) / (Cmax - Cmin)
-                    df1['M'] = (df1['M'] - Mmin) / (Mmax - Mmin)
+                    df1['M'] = (df1['M'] - Cmin) / (Cmax - Cmin)
                     df1['L'] = (df1['L'] - Lmin) / (Lmax - Lmin)
 
-                    np_temp = df1.to_numpy()[:,1:]
+                    np_temp = df1[['C','R','L']].to_numpy()
+                    
                     try:
                         hv = hvb.hypervolume(np_temp, verbose=False)
                         fd_rich = hvb.kernel_alpha(hv)
@@ -155,7 +181,7 @@ def main():
                         # fd_reg = hvb.kernel_evenness(hv, mins=mins, maxs=maxs)
                         
                     except Exception as e:
-                        print(beq)
+                        logging.info(beq)
                         fd_rich = 0.0
                         fd_div = 0.0
 
@@ -168,7 +194,7 @@ def main():
     # create a dataset with community identification, fire return time and biodiversity indices
     df_totN.to_csv(os.path.join(fpath_out, 'tilman-diversity.csv'))
 
-    print('FiresModel-Tilman difference')
+    logging.info('FiresModel-Tilman difference')
 
     df1 = pd.read_csv(os.path.join(fpath_out, 'coms-fire-bioindex-fd.csv'))
     df1['eco-type'] = df1['biome'] + df1['N'].astype(str)
@@ -177,13 +203,15 @@ def main():
     df2 = pd.read_csv(os.path.join(fpath_out, 'tilman-diversity.csv'))
     df2['eco-type'] = df2['biome'] + df2['N'].astype(str)
     df2['dynamic'] = 'Tilman'
-    df2['ncom'] += 1
+    # df2['ncom'] += 1
 
+    # Create the new dataframes
+    df3 = df1.copy().drop(columns=['Unnamed: 0','frichness','fdivergence','srichness','isimpson','dynamic'])
     df_diff = pd.DataFrame(columns=['eco-type', 'srichness', 'isimpson', 'frichness', 'fdivergence'])
 
     for indx, row in df1.iterrows():
 
-        print(row['eco-type'], row['ncom'])
+        logging.info(f"{row['eco-type']}, {row['ncom']}")
 
         df_til = df2[(df2['eco-type']==row['eco-type']) & (df2['ncom']==row['ncom'])]
 
@@ -193,8 +221,21 @@ def main():
         df_diff.at[indx,'frichness'] = row['frichness'] - df_til['frichness'].values[0]
         df_diff.at[indx,'fdivergence'] = row['fdivergence'] - df_til['fdivergence'].values[0]
 
-    df_diff.to_csv(os.path.join(fpath_out, 'biodindex-difference.csv'))
+        df3.at[indx,'eco-type'] = row['eco-type']
+        df3.at[indx, 'srich_fire'] = row['srichness']
+        df3.at[indx, 'isimp_fire'] = row['isimpson']
+        df3.at[indx, 'frich_fire'] = row['frichness']
+        df3.at[indx, 'fdiv_fire'] = row['fdivergence']
+        
+        df3.at[indx, 'srich_comp'] = df_til['srichness'].values[0]
+        df3.at[indx, 'isimp_comp'] = df_til['isimpson'].values[0]
+        df3.at[indx, 'frich_comp'] = df_til['frichness'].values[0]
+        df3.at[indx, 'fdiv_comp'] = df_til['fdivergence'].values[0]
 
+    df_diff.to_csv(os.path.join(fpath_out, 'biodindex-difference.csv'))
+    df3.to_csv(os.path.join(fpath_out, 'comp-vs-fire-diversity.csv'))
+
+    logging.info("Program completed successfully.\n\n")
 
 #--------------- (2.3) ANALYSES FUNCTIONS ---------------
 
@@ -211,16 +252,16 @@ def equil_til(NP, Clist, Mlist):
     # PARAMS FOR IMPERFECT HIERARCHY
     A = np.ones(NP)
     A[0] = 0.0
-    # print('Portion occupied at equilibrium (Tilman):')
-    # print('i', 'b_eq')
+    # logging.info('Portion occupied at equilibrium (Tilman):')
+    # logging.info('i \t b_eq')
     beq = np.zeros(NP)
     for ii in range(NP):
         beq[ii] = 1 - M[ii]/C[ii] - A[ii]*np.sum(beq[0:ii]*(1+C[0:ii]/C[ii]))
         if beq[ii] < 0:
             beq[ii] = 0.0
         # cond = C[ii] - M[ii] > 0
-        # print(ii+1, beq[ii])
-    # print('occupied space at equilibrium:', np.sum(beq),'\n')
+        # logging.info(f'{ii+1} \t {beq[ii]})
+    # logging.info(f'occupied space at equilibrium: {np.sum(beq)}\n')
     return beq
 
 def richness(b, bmin=1e-05):
@@ -246,7 +287,7 @@ def richness(b, bmin=1e-05):
     elif nd==2:
         sr = np.sum(b>bmin, axis=1)
     else:
-        print('TROPPE DIMENSIONI, restituirò un NAN!')
+        logging.warning('TROPPE DIMENSIONI, restituirò un NAN!')
         sr = np.nan
     return sr
 
@@ -277,7 +318,7 @@ def simpson(b, nnp):
         p2 = np.power(p,2)
         isi = 1 / np.sum(p2, axis=1)
     else:
-        print('TROPPE DIMENSIONI, restituirò un NAN!')
+        logging.warning('TROPPE DIMENSIONI, restituirò un NAN!')
         isi = np.nan
     return isi
 

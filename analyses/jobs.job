@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH -n 1
+#SBATCH -p batch
+#SBATCH --time 48:00:00
+#SBATCH --dependency=after:4399
+#SBATCH --mem=5000M
+#SBATCH --job-name=biofire-analyses
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=matilde.torrassa@cimafoundation.org
+#SBATCH --output=analyses.out
+
+# Define input/output directories (change only here!)
+FPATH_IN="/home/gvissio/tilman/results2"
+FPATH_OUT="/work/users/mtorrassa/biofire-idh/data_new/"
+
+which python
+python -m site
+conda info
+
+source /work/users/mtorrassa/miniforge3/etc/profile.d
+source activate env_biofire
+conda init
+conda activate env_biofire
+
+# python3 build_dataframes.py --in "$FPATH_IN" --out "$FPATH_OUT"
+python3 hypervolumes.py --in "$FPATH_IN" --out "$FPATH_OUT"
+python3 diff_tilman.py --in "$FPATH_IN" --out "$FPATH_OUT"

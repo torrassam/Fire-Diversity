@@ -1,0 +1,145 @@
+2025-03-04 17:05:09,638 root         INFO     biofire_main.py:[52     -                 main()] Generation and Simulation of N-species ecosystems and invasive experiments
+2025-03-04 17:05:09,639 root         INFO     biofire_main.py:[53     -                 main()] Experiment type: community
+2025-03-04 17:05:09,639 root         INFO     biofire_main.py:[54     -                 main()] Number of ecosystems: 1
+2025-03-04 17:05:09,639 root         INFO     biofire_main.py:[55     -                 main()] --> Number of initial species: 10
+2025-03-04 17:05:09,639 root         INFO     biofire_main.py:[97     -                 main()] --> Generation ... START!
+2025-03-04 17:05:09,639 root         INFO     biofire_main.py:[98     -                 main()] --> Generation distribution: MED with 0 noise
+2025-03-04 17:05:09,640 root         INFO     biofire_main.py:[133    -                 main()] --> Generation ... DONE!
+2025-03-04 17:05:09,640 root         INFO     biofire_main.py:[141    -                 main()] --> Simulation ... START!
+2025-03-04 17:05:09,640 root         INFO     biofire_main.py:[142    -                 main()] Simulation period: 100 years
+2025-03-04 17:05:09,640 root         INFO     biofire_main.py:[143    -                 main()] Integration time-step: 1 days
+2025-03-04 17:05:09,640 root         INFO     biofire_main.py:[144    -                 main()] Number of simulation repetition period: 1
+  0%|          | 0/1 [00:00<?, ?it/s]2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[288    -             eco_info()] Species traits:
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[290    -             eco_info()] Competition [i] - Colonization [C] - Mortality [M] - Fire Response [R] - Flammability [L] - Alien[y/n]
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 1	0.03871	0.01375	0.89951	0.06189	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 2	0.01344	0.00131	0.10838	0.00245	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 3	0.05632	0.02691	0.77445	0.4103	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 4	0.0917	0.0183	0.0935	0.0027	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 5	0.12525	0.02845	0.77346	0.00868	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 6	0.15109	0.00906	0.24238	0.00415	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 7	0.12682	0.02681	0.57961	0.09863	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 8	0.20294	0.05936	0.56505	0.00361	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 9	0.18347	0.06312	0.4521	0.03519	False
+2025-03-04 17:05:09,649 root         INFO     biofire_tools.py:[292    -             eco_info()] 10	0.16537	0.06027	0.72563	0.15554	False
+2025-03-04 17:05:09,649 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 1/12
+2025-03-04 17:05:09,650 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01]
+2025-03-04 17:05:13,912 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:13,913 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [0.03022302 0.00188215 0.02838537 0.0235536  0.27084893 0.16701995
+ 0.02547684 0.03674851 0.00688525 0.00530337]
+2025-03-04 17:05:15,530 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:15,531 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [7.72507024e-02 3.55240919e-05 5.19011600e-02 3.93012957e-03
+ 5.24991863e-01 6.09454946e-03 7.48423051e-04 7.49421952e-04
+ 4.64704274e-05 7.42483452e-05]
+2025-03-04 17:05:15,532 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 2/12
+2025-03-04 17:05:15,532 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.81 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01]
+2025-03-04 17:05:15,575 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:15,575 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [6.46804234e-01 3.14306679e-04 1.14661933e-03 3.43145676e-04
+ 2.61503619e-03 2.87551836e-03 1.89883159e-03 9.47225801e-04
+ 4.58531615e-04 6.38407615e-04]
+2025-03-04 17:05:15,618 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:15,618 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [5.88947200e-01 1.47758341e-06 1.86513202e-04 2.60614826e-06
+ 1.62410555e-03 7.73889905e-04 7.18587989e-04 3.17348876e-04
+ 5.42852764e-05 1.54190405e-04]
+2025-03-04 17:05:15,618 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 3/12
+2025-03-04 17:05:15,619 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.81 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01]
+2025-03-04 17:05:15,662 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:15,662 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [3.35418576e-02 8.15328224e-01 2.26095752e-03 4.39237013e-03
+ 3.18123846e-03 9.07030283e-03 2.84235666e-03 8.51568357e-04
+ 5.83562926e-04 5.69214754e-04]
+2025-03-04 17:05:16,224 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,225 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [1.03471824e-01 7.46889396e-01 4.63607611e-04 1.76612482e-03
+ 9.55917308e-04 7.99959290e-03 8.14585684e-04 7.80794087e-05
+ 3.88128114e-05 3.86342704e-05]
+2025-03-04 17:05:16,225 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 4/12
+2025-03-04 17:05:16,225 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.81 0.01 0.01 0.01 0.01 0.01 0.01 0.01]
+2025-03-04 17:05:16,268 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,268 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [1.46095880e-02 3.38979122e-10 1.80767475e-01 2.15250439e-10
+ 8.55587714e-03 4.81458311e-06 9.21600678e-04 1.83719712e-03
+ 1.29510385e-04 3.47090599e-03]
+2025-03-04 17:05:16,311 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,311 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [3.54483001e-02 0.00000000e+00 1.99905054e-01 0.00000000e+00
+ 7.07516681e-02 7.37483851e-06 3.07708344e-03 1.94993544e-02
+ 2.58329371e-04 1.54400853e-02]
+2025-03-04 17:05:16,311 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 5/12
+2025-03-04 17:05:16,312 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.81 0.01 0.01 0.01 0.01 0.01 0.01]
+2025-03-04 17:05:16,354 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,355 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [0.02731336 0.00020636 0.02317087 0.13297905 0.13018041 0.06600387
+ 0.04597134 0.09843233 0.01550191 0.01892631]
+2025-03-04 17:05:16,398 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,398 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [7.81502918e-02 3.62920456e-05 5.65884254e-02 1.89444689e-01
+ 3.82004029e-01 3.29509661e-02 7.36696717e-03 8.73386008e-03
+ 3.57709838e-04 5.13565166e-04]
+2025-03-04 17:05:16,398 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 6/12
+2025-03-04 17:05:16,399 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.01 0.81 0.01 0.01 0.01 0.01 0.01]
+2025-03-04 17:05:16,441 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,441 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [2.72617842e-02 2.05726889e-04 2.28729316e-02 2.63979054e-03
+ 6.16881257e-01 4.03836875e-05 6.62963964e-05 3.49868151e-05
+ 1.38171765e-05 3.12445055e-05]
+2025-03-04 17:05:16,485 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,486 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [7.01604705e-02 3.92074100e-06 4.32264332e-02 5.02202286e-04
+ 5.45471542e-01 3.50325472e-07 9.14212752e-07 3.08372316e-07
+ 4.71469377e-08 2.36323108e-07]
+2025-03-04 17:05:16,486 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 7/12
+2025-03-04 17:05:16,486 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.01 0.01 0.81 0.01 0.01 0.01 0.01]
+2025-03-04 17:05:16,529 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,530 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [3.35418576e-02 1.72736458e-02 3.57219930e-02 2.00652052e-01
+ 2.14789673e-01 3.81021318e-01 9.17302004e-06 2.49523400e-06
+ 1.85254610e-06 1.93302021e-06]
+2025-03-04 17:05:16,573 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,573 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [9.36160741e-02 2.91048046e-03 7.38018874e-02 9.98197406e-02
+ 1.76346198e-01 5.64576034e-02 3.07042313e-07 5.34838901e-08
+ 1.93318694e-08 2.80181053e-08]
+2025-03-04 17:05:16,573 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 8/12
+2025-03-04 17:05:16,574 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.01 0.01 0.01 0.81 0.01 0.01 0.01]
+2025-03-04 17:05:16,617 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,618 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [2.21727715e-02 2.43528687e-06 1.41466691e-02 2.50436786e-05
+ 2.32210373e-01 1.15332019e-02 2.99744341e-01 3.08587218e-04
+ 6.35175860e-05 3.05342247e-04]
+2025-03-04 17:05:16,660 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,661 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [6.44724662e-02 4.37703981e-07 3.72432216e-02 6.04718943e-05
+ 6.37240948e-01 2.11235716e-03 1.48849216e-02 5.18915590e-06
+ 5.10899816e-07 3.35625539e-06]
+2025-03-04 17:05:16,661 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 9/12
+2025-03-04 17:05:16,661 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.81 0.01 0.01]
+2025-03-04 17:05:16,703 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,704 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [3.35418576e-02 1.72736458e-02 3.57219930e-02 2.00652052e-01
+ 2.14789673e-01 2.66881187e-01 1.29276224e-02 3.82239565e-02
+ 7.14976648e-06 6.59702500e-06]
+2025-03-04 17:05:16,746 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,746 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [1.03471824e-01 2.65037925e-02 8.99273859e-02 4.89872439e-01
+ 4.59481803e-02 3.67400133e-02 2.26389141e-04 2.51150289e-04
+ 3.02951216e-08 2.72337201e-08]
+2025-03-04 17:05:16,747 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 10/12
+2025-03-04 17:05:16,747 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.81 0.01]
+2025-03-04 17:05:16,790 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,790 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [3.02747076e-02 1.89412282e-03 2.92541286e-02 2.72020915e-02
+ 3.30964053e-01 2.21367356e-01 3.61373294e-02 4.79157064e-02
+ 4.39493876e-02 4.27920950e-05]
+2025-03-04 17:05:16,833 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,833 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [8.55630457e-02 3.27388713e-04 6.69263326e-02 4.15567203e-02
+ 5.13264660e-01 1.39558693e-02 7.33049554e-04 5.12792742e-04
+ 1.98837348e-04 2.58090336e-07]
+2025-03-04 17:05:16,833 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 11/12
+2025-03-04 17:05:16,834 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.81]
+2025-03-04 17:05:16,876 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,877 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [2.73018806e-02 2.06246365e-04 2.31215268e-02 2.73738112e-03
+ 3.13736174e-01 1.06656534e-01 5.62293982e-02 9.49344511e-02
+ 1.10642277e-02 7.13298455e-02]
+2025-03-04 17:05:16,920 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:16,920 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [7.02196216e-02 3.92750464e-06 4.35802859e-02 5.23265967e-04
+ 4.71898931e-01 2.12341389e-03 1.09991981e-03 9.17328661e-04
+ 3.19932276e-05 4.01689210e-04]
+2025-03-04 17:05:16,921 root         INFO     biofire_main.py:[194    -                 main()] --> Simulation ... Initial condition 12/12
+2025-03-04 17:05:16,921 root         INFO     biofire_main.py:[200    -                 main()] Space occupation at t= 0 yr : [0.091 0.091 0.091 0.091 0.091 0.091 0.091 0.091 0.091 0.091]
+2025-03-04 17:05:16,963 root         INFO     biofire_main.py:[224    -                 main()] --> Simulation ... 50%
+2025-03-04 17:05:16,964 root         INFO     biofire_main.py:[226    -                 main()] Space occupation at t= 50.0 yr : [1.81621754e-01 1.52808297e-04 8.01466980e-02 6.79856909e-04
+ 2.94970620e-01 1.61583915e-02 2.84513036e-02 2.28165750e-02
+ 3.50176096e-03 7.50216488e-03]
+2025-03-04 17:05:17,006 root         INFO     biofire_main.py:[240    -                 main()] --> Simulation ... 100%
+2025-03-04 17:05:17,006 root         INFO     biofire_main.py:[241    -                 main()] Space occupation at t= 100.0 yr : [3.14212349e-01 1.70558914e-06 5.14898113e-02 2.63266135e-05
+ 2.44693259e-01 9.05513379e-04 2.06428022e-03 1.09195519e-03
+ 5.72780534e-05 2.55951637e-04]
+2025-03-04 17:05:17,007 root         INFO     biofire_main.py:[290    -                 main()] --> Writing in files ... START
+2025-03-04 17:05:17,007 root         INFO     biofire_main.py:[307    -                 main()] --> Writing in files ... DONE!
+100%|██████████| 1/1 [00:07<00:00,  7.36s/it]2025-03-04 17:05:17,008 root         INFO     biofire_main.py:[313    -                 main()] --> Simulation ... DONE!
+100%|██████████| 1/1 [00:07<00:00,  7.36s/it]

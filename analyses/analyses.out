@@ -1,0 +1,59 @@
+/var/spool/slurmd/job07527/slurm_script: line 17: python: command not found
+
+     active environment : None
+            shell level : 0
+       user config file : /home/mtorrassa/.condarc
+ populated config files : /work/users/mtorrassa/miniforge3/.condarc
+                          /home/mtorrassa/.condarc
+          conda version : 25.9.0
+    conda-build version : not installed
+         python version : 3.12.10.final.0
+                 solver : libmamba (default)
+       virtual packages : __archspec=1=skylake_avx512
+                          __conda=25.9.0=0
+                          __glibc=2.35=0
+                          __linux=5.15.0=0
+                          __unix=0=0
+       base environment : /work/users/mtorrassa/miniforge3  (writable)
+      conda av data dir : /work/users/mtorrassa/miniforge3/etc/conda
+  conda av metadata url : None
+           channel URLs : https://conda.anaconda.org/conda-forge/linux-64
+                          https://conda.anaconda.org/conda-forge/noarch
+          package cache : /work/users/mtorrassa/miniforge3/pkgs
+                          /home/mtorrassa/.conda/pkgs
+       envs directories : /work/users/mtorrassa/miniforge3/envs
+                          /home/mtorrassa/.conda/envs
+               platform : linux-64
+             user-agent : conda/25.9.0 requests/2.32.3 CPython/3.12.10 Linux/5.15.0-151-generic ubuntu/22.04.5 glibc/2.35 solver/libmamba conda-libmamba-solver/25.4.0 libmambapy/2.1.1
+                UID:GID : 1072:1072
+             netrc file : None
+           offline mode : False
+
+/var/spool/slurmd/job07527/slurm_script: line 20: source: /work/users/mtorrassa/miniforge3/etc/profile.d: is a directory
+/var/spool/slurmd/job07527/slurm_script: line 21: activate: No such file or directory
+no change     /work/users/mtorrassa/miniforge3/condabin/conda
+no change     /work/users/mtorrassa/miniforge3/bin/conda
+no change     /work/users/mtorrassa/miniforge3/bin/conda-env
+no change     /work/users/mtorrassa/miniforge3/bin/activate
+no change     /work/users/mtorrassa/miniforge3/bin/deactivate
+no change     /work/users/mtorrassa/miniforge3/etc/profile.d/conda.sh
+no change     /work/users/mtorrassa/miniforge3/etc/fish/conf.d/conda.fish
+no change     /work/users/mtorrassa/miniforge3/shell/condabin/Conda.psm1
+no change     /work/users/mtorrassa/miniforge3/shell/condabin/conda-hook.ps1
+no change     /work/users/mtorrassa/miniforge3/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /work/users/mtorrassa/miniforge3/etc/profile.d/conda.csh
+no change     /home/mtorrassa/.bashrc
+No action taken.
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Traceback (most recent call last):
+  File "/home/mtorrassa/projects/biofire/analyses/hypervolumes.py", line 8, in <module>
+    from sklearn.neighbors import KernelDensity
+ModuleNotFoundError: No module named 'sklearn'
+Traceback (most recent call last):
+  File "/home/mtorrassa/projects/biofire/analyses/diff_tilman.py", line 9, in <module>
+    import hypervolumes as hvb
+  File "/home/mtorrassa/projects/biofire/analyses/hypervolumes.py", line 8, in <module>
+    from sklearn.neighbors import KernelDensity
+ModuleNotFoundError: No module named 'sklearn'

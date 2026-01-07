@@ -1,4 +1,7 @@
 import os
+import logging
+import argparse
+
 from math import ceil
 import numpy as np
 import pandas as pd
@@ -8,17 +11,30 @@ from scipy.spatial.distance import cdist
 
 def main():
 
-    fpath_dir = "/work/users/mtorrassa/biofire-idh/data/"
+    logging.basicConfig(level=logging.INFO)
 
-    cbio_file = os.path.join(fpath_dir, 'coms-fire-bioindex.csv')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--in", dest="fpath_in", required=True)
+    parser.add_argument("--out", dest="fpath_out", required=True)
+    args = parser.parse_args()
+    
+    fpath_in = args.fpath_in
+    fpath_out = args.fpath_out
+
+    logging.info("Input directory: %s", fpath_in)
+    logging.info("Output directory: %s", fpath_out)
+
+    # fpath_dir = "/work/users/mtorrassa/biofire-idh/data_new/"
+
+    cbio_file = os.path.join(fpath_out, 'coms-fire-bioindex.csv')
     df_cbio = pd.read_csv(cbio_file)
 
-    Cmin, Cmax = 0.0, 0.3
-    Mmin, Mmax = 0.0, 0.09
-    Lmin, Lmax = 0.002, 0.5
-
+    list_dim = ['C','R','L']
+    dim = len(list_dim)
     df_cbio['frichness'] = 0.0
     df_cbio['fdivergence'] = 0.0
+
+    print(dim)
 
     for index, row in df_cbio[df_cbio['srichness']>1].iterrows():
 
@@ -27,23 +43,38 @@ def main():
         i_com = int(row['ncom'])
         init = int(row['init'])
 
-        print(f'{biome} - N={NP}')
+        logging.info(f"{biome} - N={NP}")
 
-        df = pd.read_csv(os.path.join(fpath_dir,f'comp_{biome}{NP}/coms-n{NP}-{biome}-{i_com}-{init}.csv'))
+        df = pd.read_csv(os.path.join(fpath_out, f'comp_{biome}{NP}/coms-n{NP}-{biome}-{i_com}-{init}.csv'))
         # Normalization (Range Transformation)
-        df['I'] = (df['I'] - 1) / (NP-1)
+
+        if biome=='med' and NP==10:
+           Cmin, Cmax = 0.0, 0.27 # 0.0, 20.6
+           Mmin, Mmax = 0.0, 0.1 # 0.0, 2.1
+        elif biome=='med' and NP==50:
+           Cmin, Cmax = 0.0, 0.3 # 0.0, 22.5
+           Mmin, Mmax = 0.0, 0.1 # 0.0, 2.1
+        elif biome=='bor' and NP==10:
+           Cmin, Cmax = 0.0, 0.18 # 0.0, 2.1
+           Mmin, Mmax = 0.0, 0.05 # 0.0, 0.1
+        else:
+            Cmin, Cmax = 0.0, 0.5 # dummy values
+            Mmin, Mmax = 0.0, 0.1 # dummy values
+        
+        Lmin, Lmax = 0.002, 0.5
+
         df['C'] = (df['C'] - Cmin) / (Cmax - Cmin)
         df['M'] = (df['M'] - Mmin) / (Mmax - Mmin)
         df['L'] = (df['L'] - Lmin) / (Lmax - Lmin)
 
-        np_temp = df.to_numpy()[:,1:]
+        np_temp = df[list_dim].to_numpy()
 
         try:
             hv = hypervolume(np_temp, verbose=True)
             fd_rich = kernel_alpha(hv)
             fd_div = kernel_dispersion(hv)
             
-        except Exception as e:
+        except Exception:
             fd_rich = 0.0
             fd_div = 0.0
 
@@ -51,7 +82,9 @@ def main():
         df_cbio.at[index,'fdivergence'] = fd_div
 
     # create a dataset with the communities composition
-    df_cbio.to_csv(os.path.join(fpath_dir, 'coms-fire-bioindex-fd.csv'))
+    df_cbio.to_csv(os.path.join(fpath_out, 'coms-fire-bioindex-fd.csv'))
+
+    logging.info("Program completed successfully.\n\n")
 
 # -------------------------------------------------------------------------------------
 
@@ -111,10 +144,10 @@ def hypervolume(data, bandwidth=None, samples=None, verbose=False):
     
     if samples is None:
         samples = ceil((10**(3 + np.sqrt(np.shape(data)[1])))/np.shape(data)[0])
-    
+   
     if verbose:
-        print('bandwidths:', bandwidth)
-        print('sample:', samples)
+        logging.info(f'bandwidths: {bandwidth}')
+        logging.info(f'sample: {samples}')
 
     # Randomly sample points from the KDE
     sampled_points = kde.sample(n_samples=samples, random_state=random_seed)
@@ -167,5 +200,6 @@ def kernel_dispersion(sampled_points):
 # Call script from external library
 if __name__ == "__main__":
     main()
+    # logging.info("This module is intended to be imported and used within another script.\n")
     
 # ----------------------------------------------------------------------------

@@ -1,17 +1,32 @@
 import os
 import glob
+import logging
+import warnings
+import argparse
 
 import numpy as np
 import pandas as pd
 
-import warnings
 warnings.filterwarnings("ignore", "is_categorical_dtype")
 warnings.filterwarnings("ignore", "use_inf_as_na")
 
 def main():
 
-    fpath_in = "../../../gvissio/tilman/results2/"
-    fpath_out = "/work/users/mtorrassa/biofire-idh/data/"
+    logging.basicConfig(level=logging.INFO)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--in", dest="fpath_in", required=True)
+    parser.add_argument("--out", dest="fpath_out", required=True)
+    args = parser.parse_args()
+    
+    fpath_in = args.fpath_in
+    fpath_out = args.fpath_out
+
+    logging.info("Input directory: %s", fpath_in)
+    logging.info("Output directory: %s", fpath_out)
+
+    # fpath_in = "/home/gvissio/tilman/results2" # "/home/gvissio/tilman/results_idh" for the exponential fit simulations
+    # fpath_out = "/work/users/mtorrassa/biofire-idh/data_new/" # "/work/users/mtorrassa/biofire-idh/data_new2/" for the exponential fit simulations results
 
     hv_communities = True # save the dataframes to estimate the hypervolumes metrics or not
     NPs = [10, 50]
@@ -26,17 +41,18 @@ def main():
 
     for NP in NPs:
 
-        print(f'Mediterranean - N{NP}')
+        logging.info('Mediterranean - N%s', NP)
 
         kcom = 0
-        filelist = glob.glob(os.path.join(fpath_in, f'coefficients_{NP}_2025-*.txt'))
+        filelist = sorted(glob.glob(os.path.join(fpath_in, f'coefficients_{NP}_2025-*.txt')))
 
         for k, info_file in enumerate(filelist):
 
-            print(k)
+            logging.info(f'{k}, {info_file}')
 
             nc_i = info_file.split("coefficients")[1]
-                        
+            coeff = np.loadtxt(info_file)
+                    
             bave_file = os.path.join(fpath_in, f'fixed_points{nc_i}')
             fire_file = os.path.join(fpath_in, f'firetimes{nc_i}')
 
@@ -46,20 +62,16 @@ def main():
             df_bave = df_bave.where(df_bave>bmin).fillna(0)
 
             df_fr = pd.read_csv(fire_file, sep='\s+', names=['ncom','init','frt'])
-            # df_fr = df_fr.groupby(['ncom','sim']).mean().reset_index()
 
-    #         df_stat = pd.DataFrame(df_bave.ge(bmin))
-    #         df_bave['init'] = df_stat.groupby(df_stat.columns.tolist()).ngroup() + 1
+            df_bave['ncom'] += kcom
+            kcom = df_bave['ncom'].max()
 
-            df_res = df_bave
-            df_res['ncom'] += kcom
-            kcom = df_res['ncom'].max()
-            
+            df_res = df_bave.copy()
             df_res['N'] = NP
             df_res['biome'] = 'med'
             df_res['frt']=df_fr['frt']
             df_res = df_res.set_index(['biome','N','ncom','init',])#.groupby(['biome','N','ncom','sim']).mean()
-            df_temp = df_res.reset_index() # this will be used later
+            # df_temp = df_res.reset_index() # this will be used later
             df_tot = df_res.drop(columns=blist)
 
             df_sr = pd.DataFrame(df_res[blist].ge(bmin).sum(axis=1))
@@ -69,73 +81,79 @@ def main():
             df_isi = 1 / df_isi.sum(axis=1)
             df_tot['isimpson'] = df_isi
 
-            df_totN = pd.concat([df_totN, df_tot])
+            df_tot.reset_index(inplace=True)
 
-            # Dataset containing the communities composition that will be used for the estimation of the HV functional diversity metrices
-            if hv_communities:
-                df_tot = df_tot.reset_index()
-                arr = np.loadtxt(info_file)
-                for indx, row in df_tot[df_tot['srichness']>1].iterrows():
-                    
-                    N = int(row['N'])
-                    i_com = int(row['ncom'])
-                    init = int(row['init'])
+            for index, row in df_bave.iterrows():
+                i_com = int(row['ncom'])
+                init = int(row['init'])
+                bmean = row[2:].to_numpy()
 
+                # Remove duplicates
+                duplicate=False
+                for ic in range(init-1):
+                    bmean_2 = df_bave[(df_bave['ncom']==i_com)&(df_bave['init']==ic+1)].values[0][2:]
+                    if abs(bmean - bmean_2).max()<0.001:
+                        # logging.info(f"duplicate of {i_com}-{ic+1}")
+                        df_tot.drop(index=df_tot[(df_tot['ncom']==i_com)&(df_tot['init']==init)].index, inplace=True)
+                        duplicate=True
+                        break
+                
+                if duplicate==False and hv_communities and df_tot[(df_tot['ncom']==i_com)&(df_tot['init']==init)]['srichness'].values[0]>1:
                     i = i_com - 1 - kcom
-                    a = arr[i]
+                    a = coeff[i]
 
                     # n_com = np.ones(NP) * int(arr[i][0])
-                    ind = np.arange(0,N)+1
+                    ind = np.arange(0,NP)+1
 
-                    list_c = [4*j+1 for j in range(0,N)]
-                    C = arr[i][list_c]
+                    list_c = [4*j+1 for j in range(0,NP)]
+                    C = coeff[i][list_c]
 
-                    list_m = [4*j+2 for j in range(0,N)]
-                    M = arr[i][list_m]
+                    list_m = [4*j+2 for j in range(0,NP)]
+                    M = coeff[i][list_m]
 
-                    list_r = [4*j+3 for j in range(0,N)]
-                    R = arr[i][list_r]
+                    list_r = [4*j+3 for j in range(0,NP)]
+                    R = coeff[i][list_r]
 
-                    list_l = [4*j+4 for j in range(0,N)]
-                    L = arr[i][list_l]
+                    list_l = [4*j+4 for j in range(0,NP)]
+                    L = coeff[i][list_l]
 
-                    bmean = df_temp[df_temp.index==indx].drop(columns=['N','biome','ncom','init','frt']).to_numpy()
-                    # bmean = df_temp[df_temp.index==indx].to_numpy()[:,2:]
                     vegcover = np.round(bmean*vc)
 
                     df = pd.DataFrame([ind, C, M , R, L], index=['I','C','M','R','L'], columns=ind).T
+                    
+                    if np.count_nonzero(vegcover) < 2:
+                        logging.info("one species")
+                        logging.info(vegcover)
+                    
+                    else:
+                        # logging.info('save_hv_com')
+                        cov = vegcover.tolist()
 
-                    for j,v in enumerate(vegcover):
+                        I1 = df['I'].repeat(cov)
+                        C1 = df['C'].repeat(cov)
+                        M1 = df['M'].repeat(cov)
+                        R1 = df['R'].repeat(cov)
+                        L1 = df['L'].repeat(cov)
 
-                        if np.count_nonzero(v) < 2:
-                            print("one species")
-                            print(v)
-                        
-                        else:
-                            cov = v.tolist()
+                        df1 = pd.concat([I1, C1, M1, R1, L1], axis=1)
+                        df1.to_csv(os.path.join(fpath_out,f'comp_med{NP}/coms-n{NP}-med-{i_com}-{init}.csv'))
 
-                            I1 = df['I'].repeat(cov)
-                            C1 = df['C'].repeat(cov)
-                            M1 = df['M'].repeat(cov)
-                            R1 = df['R'].repeat(cov)
-                            L1 = df['L'].repeat(cov)
-
-                            df1 = pd.concat([I1, C1, M1, R1, L1], axis=1)
-                            df1.to_csv(os.path.join(fpath_out,f'comp_med{NP}/coms-n{NP}-med-{i_com}-{init}.csv'))
+            df_totN = pd.concat([df_totN, df_tot])
 
 
     # Append the boreal simulation (that are named differently...)
-        print(f'Boreal - N{NP}')
+        logging.info(f'Boreal - N{NP}')
 
         kcom = 0
-        filelist = glob.glob(os.path.join(fpath_in, f'bor_coefficients_{NP}_2025-*.txt'))
+        filelist = sorted(glob.glob(os.path.join(fpath_in, f'bor_coefficients_{NP}_2025-*.txt')))
 
         for k, info_file in enumerate(filelist):
 
-            print(k)
+            logging.info(f'{k}, {info_file}')
 
             nc_i = info_file.split("coefficients")[1]
-                        
+            coeff = np.loadtxt(info_file)
+                    
             bave_file = os.path.join(fpath_in, f'bor_fixed_points{nc_i}')
             fire_file = os.path.join(fpath_in, f'bor_firetimes{nc_i}')
 
@@ -145,20 +163,16 @@ def main():
             df_bave = df_bave.where(df_bave>bmin).fillna(0)
 
             df_fr = pd.read_csv(fire_file, sep='\s+', names=['ncom','init','frt'])
-            # df_fr = df_fr.groupby(['ncom','sim']).mean().reset_index()
 
-    #         df_stat = pd.DataFrame(df_bave.ge(bmin))
-    #         df_bave['init'] = df_stat.groupby(df_stat.columns.tolist()).ngroup() + 1
+            df_bave['ncom'] += kcom
+            kcom = df_bave['ncom'].max()
 
-            df_res = df_bave
-            df_res['ncom'] += kcom
-            kcom = df_res['ncom'].max()
-            
+            df_res = df_bave.copy()
             df_res['N'] = NP
             df_res['biome'] = 'bor'
             df_res['frt']=df_fr['frt']
             df_res = df_res.set_index(['biome','N','ncom','init',])#.groupby(['biome','N','ncom','sim']).mean()
-            df_temp = df_res.reset_index() # this will be used later
+            # df_temp = df_res.reset_index() # this will be used later
             df_tot = df_res.drop(columns=blist)
 
             df_sr = pd.DataFrame(df_res[blist].ge(bmin).sum(axis=1))
@@ -168,63 +182,69 @@ def main():
             df_isi = 1 / df_isi.sum(axis=1)
             df_tot['isimpson'] = df_isi
 
-            df_totN = pd.concat([df_totN, df_tot])
+            df_tot.reset_index(inplace=True)
 
-            # Dataset containing the communities composition that will be used for the estimation of the HV functional diversity metrices
-            if hv_communities:
-                df_tot = df_tot.reset_index()
-                arr = np.loadtxt(info_file)
-                for indx, row in df_tot[df_tot['srichness']>1].iterrows():
-                    
-                    N = int(row['N'])
-                    i_com = int(row['ncom'])
-                    init = int(row['init'])
+            for index, row in df_bave.iterrows():
+                i_com = int(row['ncom'])
+                init = int(row['init'])
+                bmean = row[2:].to_numpy()
 
+                # Remove duplicates
+                duplicate=False
+                for ic in range(init-1):
+                    bmean_2 = df_bave[(df_bave['ncom']==i_com)&(df_bave['init']==ic+1)].values[0][2:]
+                    if abs(bmean - bmean_2).max()<0.001:
+                        # logging.info(f"duplicate of {i_com}-{ic+1}")
+                        df_tot.drop(index=df_tot[(df_tot['ncom']==i_com)&(df_tot['init']==init)].index, inplace=True)
+                        duplicate=True
+                        break
+                
+                if duplicate==False and hv_communities and df_tot[(df_tot['ncom']==i_com)&(df_tot['init']==init)]['srichness'].values[0]>1:
                     i = i_com - 1 - kcom
-                    a = arr[i]
+                    a = coeff[i]
 
                     # n_com = np.ones(NP) * int(arr[i][0])
-                    ind = np.arange(0,N)+1
+                    ind = np.arange(0,NP)+1
 
-                    list_c = [4*j+1 for j in range(0,N)]
-                    C = arr[i][list_c]
+                    list_c = [4*j+1 for j in range(0,NP)]
+                    C = coeff[i][list_c]
 
-                    list_m = [4*j+2 for j in range(0,N)]
-                    M = arr[i][list_m]
+                    list_m = [4*j+2 for j in range(0,NP)]
+                    M = coeff[i][list_m]
 
-                    list_r = [4*j+3 for j in range(0,N)]
-                    R = arr[i][list_r]
+                    list_r = [4*j+3 for j in range(0,NP)]
+                    R = coeff[i][list_r]
 
-                    list_l = [4*j+4 for j in range(0,N)]
-                    L = arr[i][list_l]
+                    list_l = [4*j+4 for j in range(0,NP)]
+                    L = coeff[i][list_l]
 
-                    bmean = df_temp[df_temp.index==indx].drop(columns=['N','biome','ncom','init','frt']).to_numpy()
-                    # bmean = df_temp[df_temp.index==indx].to_numpy()[:,2:]
                     vegcover = np.round(bmean*vc)
 
                     df = pd.DataFrame([ind, C, M , R, L], index=['I','C','M','R','L'], columns=ind).T
+                    
+                    if np.count_nonzero(vegcover) < 2:
+                        logging.info("one species")
+                        logging.info(vegcover)
+                    
+                    else:
+                        # logging.info('save_hv_com')
+                        cov = vegcover.tolist()
 
-                    for j,v in enumerate(vegcover):
+                        I1 = df['I'].repeat(cov)
+                        C1 = df['C'].repeat(cov)
+                        M1 = df['M'].repeat(cov)
+                        R1 = df['R'].repeat(cov)
+                        L1 = df['L'].repeat(cov)
 
-                        if np.count_nonzero(v) < 2:
-                            print("one species")
-                            print(v)
-                        
-                        else:
-                            cov = v.tolist()
-
-                            I1 = df['I'].repeat(cov)
-                            C1 = df['C'].repeat(cov)
-                            M1 = df['M'].repeat(cov)
-                            R1 = df['R'].repeat(cov)
-                            L1 = df['L'].repeat(cov)
-                        
-                            df1 = pd.concat([I1, C1, M1, R1, L1], axis=1) # dataframe for the hypervolume estimation
-                            df1.to_csv(os.path.join(fpath_out,f'comp_bor{NP}/coms-n{NP}-bor-{i_com}-{init}.csv'))
+                        df1 = pd.concat([I1, C1, M1, R1, L1], axis=1)
+                        df1.to_csv(os.path.join(fpath_out,f'comp_bor{NP}/coms-n{NP}-bor-{i_com}-{init}.csv'))
+            
+            df_totN = pd.concat([df_totN, df_tot])
 
     # create a dataset with community identification, fire return time and biodiversity indices
     df_totN.to_csv(os.path.join(fpath_out, 'coms-fire-bioindex.csv'))
 
+    logging.info("Program completed successfully.\n\n")
 
 # ----------------------------------------------------------------------------
 
