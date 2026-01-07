@@ -7,11 +7,11 @@ implicit none
 include "fortran_tilman.h"
 
 write(string_n, '(i0)') N  
-filename = '../results2/fixed_points_'//trim(string_n)//'_'//trim(timestamp())//'.txt'
+filename = '../results_idh/bor_fixed_points_'//trim(string_n)//'_'//trim(timestamp())//'.txt'
 open(72, file=filename)
-filename = '../results2/coefficients_'//trim(string_n)//'_'//trim(timestamp())//'.txt'
+filename = '../results_idh/bor_coefficients_'//trim(string_n)//'_'//trim(timestamp())//'.txt'
 open(73, file=filename)
-filename = '../results2/firetimes_'//trim(string_n)//'_'//trim(timestamp())//'.txt'
+filename = '../results_idh/bor_firetimes_'//trim(string_n)//'_'//trim(timestamp())//'.txt'
 open(81, file=filename, position='append')
 
 call cpu_time(start_time)
@@ -21,7 +21,7 @@ write(*,*) alfa, beta, gamma
 
 do comm_gen=1,P
 
-	call comm_gen_new(C,M,R,L,comm_gen)
+	call comm_gen_lin(C,M,R,L,comm_gen)
 
 	write(73,'(I4)', advance='no') comm_gen
 	do i=1,N
@@ -146,6 +146,97 @@ end if
 return
 
 end subroutine initial_conditions
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+subroutine comm_gen_exp(C,M,R,L,comm_gen)
+
+implicit none
+
+include "fortran_tilman.h"
+
+real*8, parameter :: k1=0.0003734213683389069, k2=1.0256427807960191, k3=0.04477604090000011
+
+real*8 :: j2
+real :: rnorm
+	
+call date_and_time(VALUES=vals)
+dummy = vals(8)
+
+do j=1,N
+
+	j2=(9.*j+N-10)/(N-1)
+
+	do while (.true.)
+		C(j) = k1*exp(j2*k2)+k3
+		M(j) = C(j)/10.
+
+		C(j) = C(j) * (1+0.3*rnorm())
+		M(j) = M(j) * (1+0.3*rnorm())
+
+		if (C(j)>M(j) .and. M(j)>0) then
+			exit 
+		end if
+	end do
+	
+	call date_and_time(VALUES=vals)
+	dummy = vals(8)
+
+	rn = ran3(vals(8))
+	R(j) = 0.001+0.999*rn
+
+	rn = ran3(vals(8))*(log10(max_firetime)-log10(min_firetime))+log10(min_firetime)
+	L(j) = 1/10**rn
+	
+enddo
+
+return
+
+end subroutine comm_gen_exp
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+subroutine comm_gen_lin(C,M,R,L,comm_gen)
+
+implicit none
+
+include "fortran_tilman.h"
+
+real*8, parameter :: k1=0.0425, k2=0.0433
+
+real*8 :: j2
+real :: rnorm
+	
+call date_and_time(VALUES=vals)
+dummy = vals(8)
+
+do j=1,N
+
+  j2 = (22*j+N-23)/(N-1)
+  do while (.true.)
+
+    C(j) = k1*j2+k2
+    M(j) = (0.035+0.015+0.023)/3.
+
+    C(j) = C(j) * (1+0.3*rnorm())
+    M(j) = M(j) * (1+0.3*rnorm())
+
+    if (C(j)>M(j) .and. M(j)>0) then
+      exit 
+    end if
+  end do
+
+  rn = ran3(vals(8))
+  R(j) = 0.001+0.999*rn
+
+  rn = ran3(vals(8))*(log10(max_firetime)-log10(min_firetime))+log10(min_firetime)
+  L(j) = 1/10**rn
+
+end do
+
+return
+
+end subroutine comm_gen_lin
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
